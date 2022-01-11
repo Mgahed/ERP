@@ -76,10 +76,6 @@
 <script src="{{asset('assets/vendor_components/apexcharts-bundle/irregular-data-series.js')}}"></script>
 <script src="{{asset('assets/vendor_components/apexcharts-bundle/dist/apexcharts.js')}}"></script>
 <script src="{{asset('assets/vendor_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js')}}"></script>
-{{-- ck editor --}}
-<script src="{{asset('assets/vendor_components/ckeditor/ckeditor.js')}}"></script>
-<script src="{{asset('assets/vendor_plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js')}}"></script>
-<script src="{{asset('admin-dashboard/js/pages/editor.js')}}"></script>
 
 {{-- data table --}}
 <script src="{{asset('assets/vendor_components/datatable/datatables.min.js')}}"></script>

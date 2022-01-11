@@ -25,7 +25,7 @@
                                             <h5>{{__('Barcode')}}<span class="text-danger">*</span></h5>
                                             <div class="controls">
                                                 <input type="text" name="barcode" autofocus required
-                                                       class="form-control" autocomplete="off">
+                                                       class="form-control" autocomplete="off" id="focus">
                                                 @error('barcode')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
