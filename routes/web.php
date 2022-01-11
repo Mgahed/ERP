@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
@@ -22,6 +23,21 @@ Route::group(['prefix' => (new Mcamara\LaravelLocalization\LaravelLocalization)-
     Route::group(['middleware' => ['auth:sanctum', 'verified'/*, 'UserRole'*/]], function () {
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+        /*----- Customer all Routes -----*/
+        Route::prefix('customer')->group(function () {
+            Route::get('/view', [CustomerController::class, 'CustomerView'])->name('all.customers');
+            Route::post('/store', [CustomerController::class, 'CustomerStore'])->name('customer.store');
+            Route::get('/edit/{id}', [CustomerController::class, 'CustomerEdit'])->name('customer.edit');
+            Route::post('/update/{id}', [CustomerController::class, 'CustomerUpdate'])->name('customer.update');
+            /*Route::get('/delete/{id}', [CategoryController::class, 'CategoryDelete'])->name('category.delete');*/
+        });
+
+        /*----- cart all Routes -----*/
+        Route::prefix('cart')->group(function () {
+            Route::post('/add', [CartController::class, 'addCart'])->name('add.cart');
+            Route::get('/remove/{rowid}', [CartController::class, 'removeCart'])->name('remove.cart');
+            Route::get('/destroy', [CartController::class, 'destroyCart'])->name('destroy.cart');
+        });
 
         /*----- Category all Routes -----*/
         Route::prefix('category')->group(function () {
@@ -30,15 +46,6 @@ Route::group(['prefix' => (new Mcamara\LaravelLocalization\LaravelLocalization)-
             Route::get('/edit/{id}', [CategoryController::class, 'CategoryEdit'])->name('category.edit');
             Route::post('/update/{id}', [CategoryController::class, 'CategoryUpdate'])->name('category.update');
             Route::get('/delete/{id}', [CategoryController::class, 'CategoryDelete'])->name('category.delete');
-        });
-
-        /*----- Customer all Routes -----*/
-        Route::prefix('customer')->group(function () {
-            Route::get('/view', [CustomerController::class, 'CustomerView'])->name('all.customers');
-            Route::post('/store', [CustomerController::class, 'CustomerStore'])->name('customer.store');
-            Route::get('/edit/{id}', [CustomerController::class, 'CustomerEdit'])->name('customer.edit');
-            Route::post('/update/{id}', [CustomerController::class, 'CustomerUpdate'])->name('customer.update');
-            /*Route::get('/delete/{id}', [CategoryController::class, 'CategoryDelete'])->name('category.delete');*/
         });
 
         /*----- Product all Routes -----*/

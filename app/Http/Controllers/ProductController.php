@@ -18,7 +18,7 @@ class ProductController extends Controller
         return [
             'name_en' => 'required',
             'name_ar' => 'required',
-            'barcode' => 'required',
+            'barcode' => 'required|unique:products',
             'quantity' => 'required|numeric|min:0',
             'buy_price' => 'required|numeric|min:0',
             'sell_price' => 'required|numeric|min:0',
@@ -33,6 +33,7 @@ class ProductController extends Controller
             'name_en.required' => __('This field is required'),
             'name_ar.required' => __('This field is required'),
             'barcode.required' => __('This field is required'),
+            'name_en.unique' => __('Barcode should be unique'),
             'quantity.required' => __('This field is required'),
             'quantity.numeric' => __('Must be a number'),
             'quantity.min' => __('Must be greater than 0'),
@@ -99,15 +100,17 @@ class ProductController extends Controller
     public function ProductDataUpdate(Request $request)
     {
         $rules = $this->getRules();
+        unset($rules['barcode']);
         $customMSG = $this->getMSG();
         $validator = Validator::make($request->all(), $rules, $customMSG);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
-        Product::findOrFail($request->id)->update([
+        $product = Product::findOrFail($request->id);
+        $product->update([
             'name_en' => strtolower($request->name_en),
             'name_ar' => $request->name_ar,
-            'barcode' => $request->barcode,
+            'barcode' => $request->barcode != null ? $request->barcode : $product->barcode,
             'quantity' => $request->quantity,
             'buy_price' => $request->buy_price,
             'sell_price' => $request->sell_price,

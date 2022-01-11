@@ -724,6 +724,13 @@
     "Customers List": "قائمة العملاء",
     "All customers": "جميع العملاء",
     "Customer updated successfully": "تم تحديث بيانات العميل بنجاح",
+    "Quantity not available": "كمية غير متوفرة",
+    "Product added": "تمت إضافة المنتج",
+    "Buying Price": "سعر الشراء",
+    "No product with this barcode": "لا يوجد منتج بهذا الباركود",
+    "Product removed": "تمت إزالة المنتج",
+    "Remove all": "حذف الكل",
+    "All products removed": "تمت إزالة جميع المنتجات",
     "Customer added successfully": "تمت إضافة العميل بنجاح",
     "Edit Customer Details": "تعديل تفاصيل العميل",
 

@@ -80,7 +80,7 @@
             </li>
             <li class="treeview {{Request::is(app()->getLocale().'/customer/*') ? 'active' : ''}}">
                 <a href="#">
-                    <i class="fa fa-users"></i> <span>{{__('Customers')}}</span>
+                    <i class="mdi mdi-account-multiple"></i> <span>{{__('Customers')}}</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
