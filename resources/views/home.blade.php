@@ -157,4 +157,16 @@
         <!-- /.content -->
 
     </div>
+    @if (Session::has('beep'))
+        <script>
+            var audio = new Audio('{{asset('sound/beep.mp3')}}');
+            audio.play();
+        </script>
+    @endif
+    @if (Session::has('notbeep'))
+        <script>
+            var audio = new Audio('{{asset('sound/incorrect.mp3')}}');
+            audio.play();
+        </script>
+    @endif
 @endsection

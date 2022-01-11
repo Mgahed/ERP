@@ -15,14 +15,16 @@ class CartController extends Controller
         if (!$product) {
             $notification = [
                 'message' => __('No product with this barcode'),
-                'alert-type' => 'error'
+                'alert-type' => 'error',
+                'notbeep' => true,
             ];
             return redirect()->back()->with($notification);
         }
         if ($request->quantity > $product->quantity) {
             $notification = [
                 'message' => __('Quantity not available'),
-                'alert-type' => 'error'
+                'alert-type' => 'error',
+                'notbeep' => true,
             ];
             return redirect()->back()->with($notification);
         }
@@ -47,7 +49,8 @@ class CartController extends Controller
 
         $notification = [
             'message' => __('Product added'),
-            'alert-type' => 'success'
+            'alert-type' => 'success',
+            'beep' => true,
         ];
         return redirect()->back()->with($notification);
     }
