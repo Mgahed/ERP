@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
+use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
     public function addCart(Request $request)
     {
-//        return Cart::content();
+        $cart = Cart::content();
         $product = Product::where('barcode', $request->barcode)->first();
         if (!$product) {
             $notification = [
@@ -20,7 +24,13 @@ class CartController extends Controller
             ];
             return redirect()->back()->with($notification);
         }
-        if ($request->quantity > $product->quantity) {
+        $cart_qty = 0;
+        foreach ($cart as $item) {
+            if ($item->id === $product->id) {
+                $cart_qty = $item->qty;
+            }
+        }
+        if ($request->quantity + $cart_qty > $product->quantity) {
             $notification = [
                 'message' => __('Quantity not available'),
                 'alert-type' => 'error',
@@ -43,6 +53,7 @@ class CartController extends Controller
             'weight' => 1,
             'options' => [
                 'discount' => $discount,
+                'price_of_buy' => $product->buy_price,
                 'product_id' => $product->id,
             ],
         ]);
@@ -75,5 +86,46 @@ class CartController extends Controller
             'alert-type' => 'info'
         ];
         return redirect()->back()->with($notification);
+    }
+
+    public function makeOrder(Request $request)
+    {
+        $carts = \Gloudemans\Shoppingcart\Facades\Cart::content();
+
+        $last_order = Order::orderBy('id', 'DESC')->first();
+        if ($last_order) {
+            $id = $last_order->id + 1;
+        } else {
+            $id = 1;
+        }
+        $number = str_pad($id, 9, "0", STR_PAD_LEFT);
+
+        $order_id = Order::insertGetId([
+            'user_id' => auth()->id(),
+            'customer_id' => $request->customer_id,
+
+            'amount' => $request->sum,
+
+            'order_number' => $number,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+
+        foreach ($carts as $cart) {
+            Product::where('id', $cart->id)->update(['quantity' => DB::raw('quantity-' . $cart->qty)]);
+            OrderItem::create([
+                'order_id' => $order_id,
+                'product_id' => $cart->id,
+                'qty' => $cart->qty,
+                'price' => $cart->price,
+                'price_of_buy' => $cart->options->price_of_buy,
+                'discount' => $cart->options->discount,
+                'subtotal' => $cart->subtotal,
+            ]);
+        }
+
+        Cart::destroy();
+
+        return redirect()->route('view-order', $order_id);
     }
 }

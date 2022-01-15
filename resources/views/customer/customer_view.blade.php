@@ -43,6 +43,9 @@
 
                                                 <a target="_blank" href="https://wa.me/+2{{ $item->mobile }}" class="btn btn-success"
                                                    title="Whatsapp"><i class="fa fa-whatsapp"></i></a>
+
+                                                <a target="_blank" href="sms:/+2{{ $item->mobile }}" class="btn btn-warning"
+                                                   title="SMS"><i class="mdi mdi-message-bulleted"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

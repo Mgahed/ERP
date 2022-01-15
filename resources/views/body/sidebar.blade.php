@@ -22,6 +22,24 @@
                     <span>{{__('Selling operation')}}</span>
                 </a>
             </li>
+            <li class="treeview {{Request::is(app()->getLocale().'/order/*') ? 'active' : ''}}">
+                <a href="#">
+                    <i class="fa fa-shopping-bag"></i> <span>{{__('Orders')}}</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{Request::is(app()->getLocale().'/order/all') ? 'active' : ''}}"><a
+                            href="{{route('all-order')}}"><i class="ti-more"></i>{{__('All orders')}}</a>
+                    </li>
+                    @if (auth()->user()->role === 'admin')
+                        <li class="{{Request::is(app()->getLocale().'/order/all-deleted') ? 'active' : ''}}"><a
+                                href="#"><i class="ti-more"></i>{{__('Deleted orders')}}</a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
             <li class="treeview {{Request::is(app()->getLocale().'/category/*') ? 'active' : ''}}">
                 <a href="#">
                     <i class="ti-layout-list-thumb-alt"></i> <span>{{__('Category')}}</span>
@@ -91,6 +109,21 @@
                     </li>
                 </ul>
             </li>
+            @if (auth()->user()->role === 'admin')
+                <li class="treeview {{Request::is(app()->getLocale().'/reports/*') ? 'active' : ''}}">
+                    <a href="#">
+                        <i class="mdi mdi-note-text"></i> <span>{{__('Reports')}}</span>
+                        <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="{{Request::is(app()->getLocale().'/reports/view') ? 'active' : ''}}"><a
+                                href="{{route('all-reports')}}"><i class="ti-more"></i>{{__('All reports')}}</a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
         </ul>
     </section>
 

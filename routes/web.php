@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +31,7 @@ Route::group(['prefix' => (new Mcamara\LaravelLocalization\LaravelLocalization)-
             Route::post('/store', [CustomerController::class, 'CustomerStore'])->name('customer.store');
             Route::get('/edit/{id}', [CustomerController::class, 'CustomerEdit'])->name('customer.edit');
             Route::post('/update/{id}', [CustomerController::class, 'CustomerUpdate'])->name('customer.update');
+            Route::get('/get/{id}', [CustomerController::class, 'GetCustomer'])->name('get.customer');
             /*Route::get('/delete/{id}', [CategoryController::class, 'CategoryDelete'])->name('category.delete');*/
         });
 
@@ -37,6 +40,7 @@ Route::group(['prefix' => (new Mcamara\LaravelLocalization\LaravelLocalization)-
             Route::post('/add', [CartController::class, 'addCart'])->name('add.cart');
             Route::get('/remove/{rowid}', [CartController::class, 'removeCart'])->name('remove.cart');
             Route::get('/destroy', [CartController::class, 'destroyCart'])->name('destroy.cart');
+            Route::post('/order', [CartController::class, 'makeOrder'])->name('make.order');
         });
 
         /*----- Category all Routes -----*/
@@ -67,6 +71,21 @@ Route::group(['prefix' => (new Mcamara\LaravelLocalization\LaravelLocalization)-
             Route::get('/view', [HomeController::class, 'AllUsers'])->name('all-users');
             Route::get('/set-admin/{id}', [HomeController::class, 'SetAdmin'])->name('SetAdmin');
             Route::get('/set-normal/{id}', [HomeController::class, 'SetNormal'])->name('SetNormal');
+        });
+
+        /*----- Order -----*/
+        Route::prefix('order')->group(function () {
+            Route::get('/all', [OrderController::class, 'AllOrders'])->name('all-order');
+            Route::get('/view/{id}', [OrderController::class, 'ViewOrder'])->name('view-order');
+            Route::get('/print/{id}', [OrderController::class, 'PrintOrder'])->name('print-order');
+        });
+
+        /*----- Reports Routes -----*/
+        Route::prefix('reports')->group(function () {
+            Route::get('/view', [ReportController::class, 'ReportView'])->name('all-reports');
+            Route::get('/search/by/date', [ReportController::class, 'ReportByDate'])->name('search-by-date');
+            Route::get('/search/by/month', [ReportController::class, 'ReportByMonth'])->name('search-by-month');
+            Route::get('/search/by/year', [ReportController::class, 'ReportByYear'])->name('search-by-year');
         });
 
 //        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

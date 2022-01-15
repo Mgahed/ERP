@@ -86,4 +86,14 @@ class CustomerController extends Controller
 
         return redirect()->route('all.customers')->with($notification);
     }
+
+    public function GetCustomer($mobile)
+    {
+        $customer = Customer::where('mobile', $mobile)->first();
+
+        return response()->json(array(
+            'name' => $customer->name,
+            'id' => $customer->id
+        ));
+    }
 }

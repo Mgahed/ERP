@@ -76,7 +76,7 @@
                     <a href="#" class="waves-effect waves-light rounded dropdown-toggle p-0" data-toggle="dropdown"
                        title="User">
                             <span class="inline-flex rounded-md">
-                                <div id="name" class="d-none">{{ Auth::user()->name }}</div>
+                                <div id="name" style="display: none;">{{ Auth::user()->name }}</div>
                                 <div id="profileImage"></div>
                                 </span>
                     </a>

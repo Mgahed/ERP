@@ -81,14 +81,10 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive-lg">
-
-
-                                <form method="post" action="{{ route('category.store') }}">
-                                    @csrf
                                     @php
                                         $carts = \Gloudemans\Shoppingcart\Facades\Cart::content();
-                                        $cartQty = \Gloudemans\Shoppingcart\Facades\Cart::count();
                                         $cartTotal = \Gloudemans\Shoppingcart\Facades\Cart::total();
+                                        $customer = \App\Models\Customer::all();
                                         $sum = 0;
                                     @endphp
                                     @if ($cartTotal>0)
@@ -127,21 +123,42 @@
 
                                         <hr>
                                         <br>
-                                        <div class="d-flex">
-                                            <div class="text-left">
-                                                <input type="submit" class="btn btn-rounded btn-primary mb-5"
-                                                       value="{{__('Confirm')}}">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <input list="customers" name="customer" id="customer"
+                                                       class="form-control"
+                                                       required placeholder="{{__('Customer number')}}">
+                                                <datalist id="customers">
+                                                    {{--<option value="{{__('Guest')}}">--}}
+                                                    @foreach ($customer as $item)
+                                                        <option value="{{$item->mobile}}">
+                                                    @endforeach
+                                                </datalist>
                                             </div>
-
-                                            <div class="ml-auto">
-                                                <a class="btn btn-rounded btn-danger mb-5"
-                                                   href="{{route('destroy.cart')}}">{{__('Remove all')}} <i
-                                                        class="fa fa-trash-o"></i></a>
+                                            <div class="col-3 customer-name">
+                                                <button onclick="get_customer()" class="btn btn-dark"><i
+                                                        class="fa fa-check"></i></button>
                                             </div>
                                         </div>
-                                    @endif
-                                </form>
+                                        <br>
+                                        <form action="{{route('make.order')}}" method="post">
+                                            @csrf
+                                            <input type="hidden" id="customer_id" name="customer_id">
+                                            <input type="hidden" id="sum" name="sum" value="{{$sum}}">
+                                            <div class="d-flex">
+                                                <div class="text-left">
+                                                    <input type="submit" class="btn btn-rounded btn-primary mb-5 d-none"
+                                                           value="{{__('Confirm')}}">
+                                                </div>
 
+                                                <div class="ml-auto">
+                                                    <a class="btn btn-rounded btn-danger mb-5"
+                                                       href="{{route('destroy.cart')}}">{{__('Remove all')}} <i
+                                                            class="fa fa-trash-o"></i></a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    @endif
 
                             </div>
                         </div>
@@ -169,4 +186,24 @@
             audio.play();
         </script>
     @endif
+    <script type="text/javascript">
+        function get_customer() {
+            var customer_number = $('input[name="customer"]').val();
+            $.ajax({
+                type: 'GET',
+                url: "{{url('/customer/get')}}/" + customer_number,
+                dataType: 'json',
+                success: function (data) {
+                    $('#customer_id').val(data.id);
+                    $('.customer-name').html('<span class="text-danger">' + data.name + '</span>');
+                    $('.d-none').removeClass('d-none');
+                    $('input[name="customer"]').prop('disabled', true).css('cursor', 'not-allowed');
+                },
+                error: function () {
+                    $('.customer-name').html('<a class="btn btn-success" href="{{route('all.customers')}}"><i class="mdi mdi-account-plus"></i></a>');
+                    $('input[name="customer"]').prop('disabled', true).css('cursor', 'not-allowed');
+                }
+            });
+        }
+    </script>
 @endsection
