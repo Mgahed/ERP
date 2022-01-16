@@ -12,7 +12,7 @@
 
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">{{__('Orders List')}}</h3>
+                            <h3 class="box-title">{{__('Deleted orders List')}}</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -39,12 +39,13 @@
                                             <td> {{$item->customer->name}}  </td>
 
                                             <td width="25%">
-                                                <a href="{{ route('view-order',$item->id) }}"
-                                                   class="btn btn-info" title="Details"><i class="fa fa-eye"></i> </a>
-                                                <a href="{{route('delete.order',$item->id)}}" class="btn btn-danger"
+                                                <a href="{{ route('restore.order',$item->id) }}"
+                                                   class="btn btn-success" title="Restore" id="restore">
+                                                    <i class="mdi mdi-backup-restore font-size-22"></i></a>
+                                                {{--<a href="{{route('delete.order',$item->id)}}" class="btn btn-danger"
                                                    title="Delete order">
                                                     <i class="fa fa-trash"></i>
-                                                </a>
+                                                </a>--}}
                                             </td>
                                         </tr>
                                     @endforeach

@@ -52,9 +52,17 @@
                                             <td> {{$item->subtotal-($item->qty*$item->discount)}}{{__('EGP')}}  </td>
 
                                             <td width="25%">
-                                                <a href="#" class="btn btn-danger" title="Delete item">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
+                                                @if ($item->product->deleted_at != null)
+                                                    <span class="text-danger">{{__('Deleted product')}}</span>
+                                                @else
+                                                    <a href="{{route('remove.all.items',$item->id)}}" class="btn btn-danger" title="Delete item">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                    <a href="{{route('remove.item',$item->id)}}" class="btn btn-primary"
+                                                       title="Remove 1">
+                                                        <i class="mdi mdi-minus"></i>
+                                                    </a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

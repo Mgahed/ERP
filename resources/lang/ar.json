@@ -743,6 +743,12 @@
     "Orders List": "قائمة الطلبات",
     "Customer added successfully": "تمت إضافة العميل بنجاح",
     "Edit Customer Details": "تعديل تفاصيل العميل",
+    "One item deleted": "تم حذف عنصر واحد",
+    "All items deleted": "تم حذف كافة العناصر",
+    "Order deleted": "تم حذف الطلب",
+    "Deleted product": "منتج محذوف",
+    "Order restored": "تمت استعادة الطلب",
+    "Deleted orders List": "قائمة الطلبات المحذوفة",
 
     "navbar": "/*---------------------------------------- ----------------------------------------*/",
     "Home": "الرئيسية",

@@ -34,8 +34,8 @@
                             href="{{route('all-order')}}"><i class="ti-more"></i>{{__('All orders')}}</a>
                     </li>
                     @if (auth()->user()->role === 'admin')
-                        <li class="{{Request::is(app()->getLocale().'/order/all-deleted') ? 'active' : ''}}"><a
-                                href="#"><i class="ti-more"></i>{{__('Deleted orders')}}</a>
+                        <li class="{{Request::is(app()->getLocale().'/order/deleted/all') ? 'active' : ''}}"><a
+                                href="{{route('deleted.orders')}}"><i class="ti-more"></i>{{__('Deleted orders')}}</a>
                         </li>
                     @endif
                 </ul>
