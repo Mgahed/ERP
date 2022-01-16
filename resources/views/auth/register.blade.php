@@ -165,9 +165,10 @@
                                     <div class="row">
                                         <!-- /.col -->
                                         <div class="col-12 text-center">
-                                            <button type="submit" class="btn btn-info btn-rounded margin-top-10">
+                                            {{--<button type="submit" class="btn btn-info btn-rounded margin-top-10">
                                                 {{__('Register')}}
-                                            </button>
+                                            </button>--}}
+                                            <input type="submit" class="btn btn-info btn-rounded margin-top-10" value="{{__('Register')}}">
                                         </div>
                                         <!-- /.col -->
                                     </div>

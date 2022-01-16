@@ -20,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/home', function () {
+    return redirect()->route('home');
+});
 Route::group(['prefix' => (new Mcamara\LaravelLocalization\LaravelLocalization)->setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
     Auth::routes();
     Route::group(['middleware' => ['auth:sanctum', 'verified'/*, 'UserRole'*/]], function () {

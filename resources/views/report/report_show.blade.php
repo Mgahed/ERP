@@ -21,6 +21,11 @@
                             <button type="button" id="export_button" class="btn btn-success"
                                     style="margin: auto;">{{__('Export')}} <i class="fa fa-file-excel-o"></i></button>
                         </div>
+                        <br>
+{{--                        <div class="text-center m-5">--}}
+                            <span class="m-5 alert alert-dark text-center w-lg-400 w-md-auto w-sm-auto" style="align-self: center;">{{__('Total profit is')}} <span
+                                    class="put_sum"></span> {{__('EGP')}}</span>
+{{--                        </div>--}}
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive">
@@ -50,9 +55,9 @@
                                             <td> {{ $item->created_at->format('d/m/Y h:iA') }}  </td>
                                             <td> {{ $item->order_number }}  </td>
                                             <td> {{ $item->amount }} </td>
-                                            <td> {{ $item->amount-$sum }} </td>
+                                            <td class="totalprice"> {{ $item->amount-$sum }} </td>
                                             <td> {{$item->user->name}}  </td>
-                                            <td> {{$item->customer->name}}  </td>
+                                            <td> {{$item->customer->name}} - ({{$item->customer->mobile}})</td>
                                             <td width="25%">
                                                 <a href="{{ route('view-order',$item->id) }}"
                                                    class="btn btn-info" title="Details"><i class="fa fa-eye"></i> </a>
@@ -93,6 +98,17 @@
         export_button.addEventListener('click', () => {
             html_table_to_excel('xlsx');
         });
+
+
+        setInterval(oneSecondFunction, 1000)
+
+        function oneSecondFunction() {
+            var sum = 0;
+            $('.totalprice').each(function () {
+                sum += parseFloat($(this).text());  // Or this.innerHTML, this.innerText
+            });
+            $('.put_sum').html(sum);
+        }
     </script>
 
 
