@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{app()->getLocale() === 'en' ? 'ltr' : 'rtl'}}">
 <head>
+    {{--    pwa--}}
+    <link rel="manifest" href="{{asset('manifest.json')}}">
+    <link rel="apple-touch-icon" href="{{asset('images/96x96.png')}}">
+    <meta name="theme-color" content="#027B9A"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#004658">
+    <meta name="apple-mobile-web-app-title" content="Kiki Riki">
+    {{--    End pwa--}}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,8 +42,8 @@
             color: #fff;
             text-align: center;
             line-height: 43px;
-            }
-</style>
+        }
+    </style>
 </head>
 
 <body class="hold-transition dark-skin sidebar-mini theme-primary fixed">
@@ -102,7 +110,7 @@
 <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         var intials = $('#name').text().charAt(0);
         var profileImage = $('#profileImage').text(intials);
     });
@@ -143,7 +151,13 @@
     }
     @endif
 </script>
-
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('{{asset('sw.js')}}')
+            .then(reg => console.log('sw registerd', reg))
+            .catch(err => console.log('sw registerd error', err))
+    }
+</script>
 
 </body>
 </html>
