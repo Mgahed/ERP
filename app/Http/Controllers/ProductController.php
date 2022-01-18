@@ -149,7 +149,7 @@ class ProductController extends Controller
                     'msg' => $message
                 ];
 
-                Mail::to('mgahed@mrtechnawy.com')->send(new DeleteProductMail($email_data));
+                Mail::to('abdelrhmanmgahed131@gmail.com')->send(new DeleteProductMail($email_data));
             }
 
             return redirect()->back()->with($notification);

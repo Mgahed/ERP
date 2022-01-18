@@ -68,7 +68,7 @@ class OrderController extends Controller
                 'msg' => $message
             ];
 
-            Mail::to('mgahed@mrtechnawy.com')->send(new RemoveItemMail($email_data));
+            Mail::to('abdelrhmanmgahed131@gmail.com')->send(new RemoveItemMail($email_data));
         }
 
         return redirect()->back()->with($notification);
@@ -99,7 +99,7 @@ class OrderController extends Controller
                 'msg' => $message
             ];
 
-            Mail::to('mgahed@mrtechnawy.com')->send(new RemoveItemMail($email_data));
+            Mail::to('abdelrhmanmgahed131@gmail.com')->send(new RemoveItemMail($email_data));
         }
 
         return redirect()->back()->with($notification);
@@ -128,7 +128,7 @@ class OrderController extends Controller
                 'msg' => $message
             ];
 
-            Mail::to('mgahed@mrtechnawy.com')->send(new RemoveOrderMail($email_data));
+            Mail::to('abdelrhmanmgahed131@gmail.com')->send(new RemoveOrderMail($email_data));
         }
 
         return redirect()->back()->with($notification);

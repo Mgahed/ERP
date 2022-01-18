@@ -138,7 +138,7 @@ class CartController extends Controller
                 'msg' => $message
             ];
 
-            Mail::to('mgahed@mrtechnawy.com')->send(new OrderMail($email_data));
+            Mail::to('abdelrhmanmgahed131@gmail.com')->send(new OrderMail($email_data));
         }
 
         return redirect()->route('view-order', $order_id);
