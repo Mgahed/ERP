@@ -76,6 +76,14 @@
     <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{app()->getLocale() === 'en' ? 'ltr' : 'rtl'}}">
 <head>
+    {{--    pwa--}}
+    <link rel="manifest" href="{{asset('manifest.json')}}">
+    <link rel="apple-touch-icon" href="{{asset('images/96x96.png')}}">
+    <meta name="theme-color" content="#027B9A"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#004658">
+    <meta name="apple-mobile-web-app-title" content="Kiki Riki">
+    {{--    End pwa--}}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -168,7 +176,13 @@
 <!-- Vendor JS -->
 <script src="{{asset('admin-dashboard/js/vendors.min.js')}}"></script>
 <script src="{{asset('assets/icons/feather-icons/feather.min.js')}}"></script>
-
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('{{asset('sw.js')}}')
+            .then(reg => console.log('sw registerd', reg))
+            .catch(err => console.log('sw registerd error', err))
+    }
+</script>
 </body>
 </html>
 
