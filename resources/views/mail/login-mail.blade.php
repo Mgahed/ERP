@@ -1,8 +1,8 @@
 @component('mail::message')
 # From Kiki Riki System
 
-{{$email_data['name']}}
+<p style="color: red; direction: rtl;"> عن {{$email_data['name']}} </p>
 
-{!! $email_data['msg'] !!}
+<span style="direction: rtl;">{!! $email_data['msg'] !!}</span>
 
 @endcomponent

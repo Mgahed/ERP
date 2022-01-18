@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Mail\DeleteProductMail;
+use App\Mail\RemoveOrderMail;
 use App\Models\Category;
 use App\Models\MultiImg;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Image;
 
@@ -129,12 +133,25 @@ class ProductController extends Controller
     public function ProductDelete($id)
     {
         $product = Product::findOrFail($id);
+        $name = $product->name_ar;
         $delete = $product->delete();
         if ($delete) {
             $notification = [
                 'message' => __('Product deleted successfully'),
                 'alert-type' => 'success'
             ];
+
+            if (Auth::user()->role != 'admin') {
+                $user = Auth::user()->name;
+                $message = " لقد قام " . $user . " بحذف المنتج "  . $name;
+                $email_data = [
+                    'name' => $user,
+                    'msg' => $message
+                ];
+
+                Mail::to('mgahed@mrtechnawy.com')->send(new DeleteProductMail($email_data));
+            }
+
             return redirect()->back()->with($notification);
         }
         $notification = [

@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\LoginMail;
+use App\Mail\OrderMail;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
@@ -125,6 +129,17 @@ class CartController extends Controller
         }
 
         Cart::destroy();
+
+        if (Auth::user()->role != 'admin') {
+            $user = Auth::user()->name;
+            $message = " لقد قام " . $user . " بعمل طلب جديد برقم " . $number;
+            $email_data = [
+                'name' => $user,
+                'msg' => $message
+            ];
+
+            Mail::to('mgahed@mrtechnawy.com')->send(new OrderMail($email_data));
+        }
 
         return redirect()->route('view-order', $order_id);
     }

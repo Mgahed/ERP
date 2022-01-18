@@ -124,7 +124,7 @@
                                     </div>
                                     <input type="text"
                                            class="form-control pl-15 bg-transparent text-white plc-white @error('email') is-invalid @enderror"
-                                           name="email" value="{{ old('email') }}" placeholder="{{__('Username')}}" required>
+                                           name="email" value="{{ old('email') }}" autocomplete="off" placeholder="{{__('Username')}}" required>
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

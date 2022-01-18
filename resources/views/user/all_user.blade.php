@@ -29,8 +29,8 @@
                                     <thead>
                                     <tr>
                                         <th>{{__('Name')}}</th>
-                                        <th>{{__('Username')}}</th>
                                         @if (auth()->user()->role === 'admin')
+                                            <th>{{__('Username')}}</th>
                                             <th>{{__('Role')}}</th>
                                             <th>{{__('Action')}}</th>
                                         @endif
@@ -40,11 +40,12 @@
                                     @foreach($users as $user)
                                         <tr>
                                             <td>{{ $user->name }}</td>
-                                            <td>{{ $user->email }}</td>
                                             @if (auth()->user()->role === 'admin')
+                                                <td>{{ $user->email }}</td>
                                                 <td>{{ $user->role }}</td>
                                                 <td>
-                                                    <div class="btn-group-vertical" style="display: inline-flex; width: 100%;">
+                                                    <div class="btn-group-vertical"
+                                                         style="display: inline-flex; width: 100%;">
                                                         @if ($user->role !== 'admin')
                                                             <a href="{{route('SetAdmin',$user->id)}}"
                                                                class="btn btn-success btn-md">{{__('Set admin')}}

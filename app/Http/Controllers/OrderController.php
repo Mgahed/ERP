@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderMail;
+use App\Mail\RemoveItemMail;
+use App\Mail\RemoveOrderMail;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -46,13 +51,26 @@ class OrderController extends Controller
             ]);
         }
 
-        Product::findOrFail($item->product_id)->update(['quantity' => DB::raw('quantity+1')]);
+        $product = Product::findOrFail($item->product_id);
+        $product->update(['quantity' => DB::raw('quantity+1')]);
         Order::findOrFail($item->order_id)->update(['amount' => DB::raw('amount-' . $deleted_price)]);
 
         $notification = [
             'message' => __('One item deleted'),
             'alert-type' => 'info'
         ];
+
+        if (Auth::user()->role != 'admin') {
+            $user = Auth::user()->name;
+            $message = " لقد قام " . $user . " بحذف عنصر واحد " . $product->name_ar . " من الطلب رقم " . $item->order_id;
+            $email_data = [
+                'name' => $user,
+                'msg' => $message
+            ];
+
+            Mail::to('mgahed@mrtechnawy.com')->send(new RemoveItemMail($email_data));
+        }
+
         return redirect()->back()->with($notification);
     }
 
@@ -63,7 +81,8 @@ class OrderController extends Controller
 
         $item->delete();
 
-        Product::findOrFail($item->product_id)->update(['quantity' => DB::raw('quantity+' . $item->qty)]);
+        $product = Product::findOrFail($item->product_id);
+        $product->update(['quantity' => DB::raw('quantity+' . $item->qty)]);
         Order::findOrFail($item->order_id)->update(['amount' => DB::raw('amount-' . $deleted_price)]);
 
         $notification = [
@@ -71,6 +90,18 @@ class OrderController extends Controller
 
             'alert-type' => 'info'
         ];
+
+        if (Auth::user()->role != 'admin') {
+            $user = Auth::user()->name;
+            $message = " لقد قام " . $user . " بحذف عدد " . $item->qty . " عنصر لمنتج " . $product->name_ar . " من الطلب رقم " . $item->order_id;
+            $email_data = [
+                'name' => $user,
+                'msg' => $message
+            ];
+
+            Mail::to('mgahed@mrtechnawy.com')->send(new RemoveItemMail($email_data));
+        }
+
         return redirect()->back()->with($notification);
     }
 
@@ -88,6 +119,18 @@ class OrderController extends Controller
 
             'alert-type' => 'info'
         ];
+
+        if (Auth::user()->role != 'admin') {
+            $user = Auth::user()->name;
+            $message = " لقد قام " . $user . " بحذف الطلب رقم "  . $order->order_number;
+            $email_data = [
+                'name' => $user,
+                'msg' => $message
+            ];
+
+            Mail::to('mgahed@mrtechnawy.com')->send(new RemoveOrderMail($email_data));
+        }
+
         return redirect()->back()->with($notification);
     }
 
