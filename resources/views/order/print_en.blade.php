@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -139,25 +139,25 @@
         <div style="font-weight: bold;">
             <table style="border: 0;">
                 <tr style="border: 0;">
-                    <th style="border: 0;"> رقم الفاتورة:</th>
+                    <th style="border: 0;">Invoice NO: </th>
                     <th style="border: 0;"> {{ $order->order_number }} </th>
                 </tr>
                 <tr style="border: 0;">
-                    <th style="border: 0;"> اسم العميل:</th>
+                    <th style="border: 0;">Customer: </th>
                     <th style="border: 0;"> {{ $order->customer->name }} </th>
                 </tr>
                 <tr style="border: 0;">
-                    <th style="border: 0;"> التاريخ:</th>
+                    <th style="border: 0;">Date: </th>
                     <th style="border: 0;"> {{ $order->created_at->format('d/m/Y') }} </th>
                     <td style="border: 0;"></td>
                     <td style="border: 0;"></td>
                     <td style="border: 0;"></td>
                     <td style="border: 0;"></td>
-                    <th style="border: 0;"> الوقت:</th>
+                    <th style="border: 0;">Time: </th>
                     <th style="border: 0;"> {{ $order->created_at->format('h:i A') }} </th>
                 </tr>
                 <tr style="border: 0;">
-                    <th style="border: 0;"> الكاشير:</th>
+                    <th style="border: 0;">Cashier: </th>
                     <th style="border: 0;"> {{ $order->user->name }} </th>
                 </tr>
             </table>
@@ -173,45 +173,49 @@
         <table>
             <thead>
             <tr>
-                <th class="quantity">الكمية</th>
-                <th class="description">الاسم</th>
-                <th class="price">السعر</th>
-                <th class="price">الخصم</th>
-                <th class="price">الاجمالي</th>
+                <th class="quantity">Qty</th>
+                <th class="description">Product</th>
+                <th class="price">Price</th>
+                <th class="price">Discount</th>
+                <th class="price">Total</th>
             </tr>
             </thead>
             <tbody>
             @foreach ($order->orderItem as $item)
                 <tr>
                     <td class="quantity">{{$item->qty+0}}</td>
-                    <td class="description">{{$item->product->name_ar}}</td>
+                    <td class="description">{{$item->product->name_en}}</td>
                     <td width="100%" class="price">{{($item->qty+0)}}*{{($item->price+0)}}</td>
                     <td width="100%" class="price">{{($item->qty+0)}}*{{($item->discount+0)}}</td>
                     <td class="price">{{$item->subtotal-(($item->qty+0)*($item->discount+0))}}</td>
                 </tr>
             @endforeach
             <tr style="font-weight: bold;">
-                <td colspan="4" style="text-align: inherit;">الاجمالي</td>
+                <td colspan="4" style="text-align: inherit;">Final total</td>
                 <td colspan="1" {{--style="direction: ltr; text-align: center;"--}}>{{$order->amount}}</td>
             </tr>
             </tbody>
         </table>
         <p class="centered">
-            يمكن استبدال او استرجاع المشتريات خلال 14 يوم من
+            Purchased items can be exchanged or returned within
             <br>
-            تاريخ الشراء اذا شاب السلعة عيب في الصناعة وفقا للمادة
+            14 days from the date of purchase if the commodity has
             <br>
-            8 من قانون حماية المستهلك على ان تكون في نفس حالة شرائها
+            a manufacturing defect in accordance with Article
+            <br>
+            number 8 from the Consumer Protection Law,
+            <br>
+            provided that they are in the same condition
+            <br>
+            as they were purchased.
             <br><br>
-            شكرا لتعاملكم معنا!
-            <br>
-            سعدنا بزيارتكم!
+            We enjoyed your visit!
             <br><br>
-            تواصل معنا عبر:
-            <br>رقمنا: 01063001503</p>
+            Contact us via:
+            <br>Number: 01063001503</p>
     </div>
-    <button id="btnPrint" class="hidden-print btn btn-success">طباعة</button>
-    <a href="javascript:history.back()" class="hidden-print btn btn-danger">رجوع</a>
+    <button id="btnPrint" class="hidden-print btn btn-success">Print</button>
+    <a href="javascript:history.back()" class="hidden-print btn btn-danger">Back</a>
 </center>
 <script>
     const $btnPrint = document.querySelector("#btnPrint");

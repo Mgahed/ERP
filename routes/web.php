@@ -81,6 +81,7 @@ Route::group(['prefix' => (new Mcamara\LaravelLocalization\LaravelLocalization)-
             Route::get('/all', [OrderController::class, 'AllOrders'])->name('all-order');
             Route::get('/view/{id}', [OrderController::class, 'ViewOrder'])->name('view-order');
             Route::get('/print/{id}', [OrderController::class, 'PrintOrder'])->name('print-order');
+            Route::get('/print-en/{id}', [OrderController::class, 'PrintOrderEN'])->name('print-order-en');
             Route::get('/item/remove/{id}', [OrderController::class, 'RemoveItem'])->name('remove.item');
             Route::get('/item/delete/{id}', [OrderController::class, 'RemoveAllItem'])->name('remove.all.items');
             Route::get('/delete/{id}', [OrderController::class, 'DeleteOrder'])->name('delete.order');

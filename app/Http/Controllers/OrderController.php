@@ -38,6 +38,14 @@ class OrderController extends Controller
         return view('order.print', compact('order'));
     }
 
+    public function PrintOrderEN($id)
+    {
+        $order = Order::with(['orderItem.product' => function ($q) {
+            $q->withTrashed();
+        }])->with('user')->with('customer')->findOrFail($id);
+        return view('order.print_en', compact('order'));
+    }
+
     public function RemoveItem($id)
     {
         $item = OrderItem::findOrFail($id);

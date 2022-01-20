@@ -14,7 +14,13 @@
                         <div class="box-header with-border d-flex">
                             <h3 class="box-title p-2">{{__('Order Details')}}</h3>
                             <div class="ml-auto p-2">
-                                <a href="{{route('print-order',$order->id)}}" class="btn btn-warning">{{__('Print')}}
+                                <a href="{{route('print-order',$order->id)}}"
+                                   class="btn btn-warning">{{__('طباعة بالعربية')}}
+                                    <i class="fa fa-print"></i>
+                                </a>
+
+                                <a href="{{route('print-order-en',$order->id)}}"
+                                   class="btn btn-warning">{{__('Print in English')}}
                                     <i class="fa fa-print"></i>
                                 </a>
                             </div>
@@ -45,7 +51,7 @@
                                     <tbody>
                                     @foreach($order->orderItem as $item)
                                         <tr>
-                                            <td> {{$item->product->name_ar}}  </td>
+                                            <td> {{app()->getLocale()=='en'?$item->product->name_en:$item->product->name_ar}}  </td>
                                             <td> {{$item->qty}}  </td>
                                             <td> {{$item->qty}}*{{$item->price}}{{__('EGP')}}  </td>
                                             <td> {{$item->qty}}*{{$item->discount}}{{__('EGP')}}  </td>
@@ -55,7 +61,8 @@
                                                 @if ($item->product->deleted_at != null)
                                                     <span class="text-danger">{{__('Deleted product')}}</span>
                                                 @else
-                                                    <a href="{{route('remove.all.items',$item->id)}}" class="btn btn-danger" title="Delete item">
+                                                    <a href="{{route('remove.all.items',$item->id)}}"
+                                                       class="btn btn-danger" title="Delete item">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
                                                     <a href="{{route('remove.item',$item->id)}}" class="btn btn-primary"
