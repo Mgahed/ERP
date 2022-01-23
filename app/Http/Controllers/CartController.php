@@ -108,6 +108,8 @@ class CartController extends Controller
             'user_id' => auth()->id(),
             'customer_id' => $request->customer_id,
 
+            'customer_discount' => $request->customer_discount,
+
             'amount' => $request->sum,
 
             'order_number' => $number,
@@ -138,7 +140,7 @@ class CartController extends Controller
                 'msg' => $message
             ];
 
-            Mail::to('abdelrhmanmgahed131@gmail.com')->send(new OrderMail($email_data));
+            Mail::to('ahmedalaa123V@gmail.com')->send(new OrderMail($email_data));
         }
 
         return redirect()->route('view-order', $order_id);

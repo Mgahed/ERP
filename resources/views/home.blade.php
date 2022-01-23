@@ -81,84 +81,97 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive-lg">
-                                    @php
-                                        $carts = \Gloudemans\Shoppingcart\Facades\Cart::content();
-                                        $cartTotal = \Gloudemans\Shoppingcart\Facades\Cart::total();
-                                        $customer = \App\Models\Customer::all();
-                                        $sum = 0;
-                                    @endphp
-                                    @if ($cartTotal>0)
+                                @php
+                                    $carts = \Gloudemans\Shoppingcart\Facades\Cart::content();
+                                    $cartTotal = \Gloudemans\Shoppingcart\Facades\Cart::total();
+                                    $customer = \App\Models\Customer::all();
+                                    $sum = 0;
+                                @endphp
+                                @if ($cartTotal>0)
+                                    <div class="row">
+                                        <div class="col-4">{{__('Name')}}</div>
+                                        <div class="col-2">{{__('Price')}}</div>
+                                        <div class="col-2">{{__('Discount')}}</div>
+                                        <div class="col-2">{{__('Total')}}</div>
+                                        <div class="col-2">{{__('Action')}}</div>
+                                    </div>
+                                    <hr>
+                                    @foreach ($carts as $item)
                                         <div class="row">
-                                            <div class="col-4">{{__('Name')}}</div>
-                                            <div class="col-2">{{__('Price')}}</div>
-                                            <div class="col-2">{{__('Discount')}}</div>
-                                            <div class="col-2">{{__('Total')}}</div>
-                                            <div class="col-2">{{__('Action')}}</div>
+                                            <div class="col-4">{{$item->qty}}*{{$item->name}}</div>
+                                            <div class="col-2">{{$item->qty}}*{{$item->price}}</div>
+                                            <div class="col-2">{{$item->qty}}*{{$item->options->discount}}</div>
+                                            <div
+                                                class="col-2">{{$item->subtotal-($item->qty*$item->options->discount)}}</div>
+                                            @php($sum+=$item->subtotal-($item->qty*$item->options->discount))
+                                            <div class="col-2">
+                                                <a href="{{route('remove.cart',$item->rowId)}}"
+                                                   class="btn btn-sm btn-danger">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                         <hr>
-                                        @foreach ($carts as $item)
-                                            <div class="row">
-                                                <div class="col-4">{{$item->qty}}*{{$item->name}}</div>
-                                                <div class="col-2">{{$item->qty}}*{{$item->price}}</div>
-                                                <div class="col-2">{{$item->qty}}*{{$item->options->discount}}</div>
-                                                <div
-                                                    class="col-2">{{$item->subtotal-($item->qty*$item->options->discount)}}</div>
-                                                @php($sum+=$item->subtotal-($item->qty*$item->options->discount))
-                                                <div class="col-2">
-                                                    <a href="{{route('remove.cart',$item->rowId)}}"
-                                                       class="btn btn-sm btn-danger">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                        @endforeach
-                                        <div class="row">
-                                            <div class="col-4"><b>{{__('Total')}}</b></div>
-                                            <div class="col-2"></div>
-                                            <div class="col-2"></div>
-                                            <div class="col-2"><b>{{$sum}}</b></div>
-                                            <div class="col-2"></div>
-                                        </div>
+                                    @endforeach
+                                    <div class="row">
+                                        <div class="col-4"><b>{{__('Total')}}</b></div>
+                                        <div class="col-2"></div>
+                                        <div class="col-2"></div>
+                                        <div class="col-2"><b id="final_total">{{$sum}}</b></div>
+                                        <div class="col-2"></div>
+                                    </div>
 
-                                        <hr>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-9">
-                                                <input list="customers" name="customer" id="customer"
-                                                       class="form-control"
-                                                       required placeholder="{{__('Customer number')}}">
-                                                <datalist id="customers">
-                                                    {{--<option value="{{__('Guest')}}">--}}
-                                                    @foreach ($customer as $item)
-                                                        <option value="{{$item->mobile}}">
-                                                    @endforeach
-                                                </datalist>
+                                    <hr>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <input type="number" step="0.1" id="discount"
+                                                   class="form-control" autocomplete="off" min="0" value="0"
+                                                   required placeholder="{{__('Additional discount')}}">
+                                        </div>
+                                        <div class="col-3">
+                                            <button onclick="get_discount()" class="btn btn-dark"><i
+                                                    class="fa fa-check"></i></button>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <input list="customers" name="customer" id="customer"
+                                                   class="form-control"
+                                                   required placeholder="{{__('Customer number')}}">
+                                            <datalist id="customers">
+                                                {{--<option value="{{__('Guest')}}">--}}
+                                                @foreach ($customer as $item)
+                                                    <option value="{{$item->mobile}}">
+                                                @endforeach
+                                            </datalist>
+                                        </div>
+                                        <div class="col-3 customer-name">
+                                            <button onclick="get_customer()" class="btn btn-dark"><i
+                                                    class="fa fa-check"></i></button>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <form action="{{route('make.order')}}" method="post">
+                                        @csrf
+                                        <input type="hidden" id="customer_id" name="customer_id">
+                                        <input type="hidden" id="customer_discount" name="customer_discount" value="0">
+                                        <input type="hidden" id="sum" name="sum" value="{{$sum}}">
+                                        <div class="d-flex">
+                                            <div class="text-left">
+                                                <input type="submit" class="btn btn-rounded btn-primary mb-5 d-none"
+                                                       value="{{__('Confirm')}}">
                                             </div>
-                                            <div class="col-3 customer-name">
-                                                <button onclick="get_customer()" class="btn btn-dark"><i
-                                                        class="fa fa-check"></i></button>
+
+                                            <div class="ml-auto">
+                                                <a class="btn btn-rounded btn-danger mb-5"
+                                                   href="{{route('destroy.cart')}}">{{__('Remove all')}} <i
+                                                        class="fa fa-trash-o"></i></a>
                                             </div>
                                         </div>
-                                        <br>
-                                        <form action="{{route('make.order')}}" method="post">
-                                            @csrf
-                                            <input type="hidden" id="customer_id" name="customer_id">
-                                            <input type="hidden" id="sum" name="sum" value="{{$sum}}">
-                                            <div class="d-flex">
-                                                <div class="text-left">
-                                                    <input type="submit" class="btn btn-rounded btn-primary mb-5 d-none"
-                                                           value="{{__('Confirm')}}">
-                                                </div>
-
-                                                <div class="ml-auto">
-                                                    <a class="btn btn-rounded btn-danger mb-5"
-                                                       href="{{route('destroy.cart')}}">{{__('Remove all')}} <i
-                                                            class="fa fa-trash-o"></i></a>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    @endif
+                                    </form>
+                                @endif
 
                             </div>
                         </div>
@@ -204,6 +217,14 @@
                     $('input[name="customer"]').prop('disabled', true).css('cursor', 'not-allowed');
                 }
             });
+        }
+
+        function get_discount() {
+            let discount = $('#discount').val();
+            // alert(discount)
+            let total = {{$sum}};//$('#final_total').html();
+            $('#final_total').html(total - discount);
+            $('#customer_discount').val(discount);
         }
     </script>
 @endsection

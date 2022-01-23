@@ -190,9 +190,24 @@
                     <td class="price">{{$item->subtotal-(($item->qty+0)*($item->discount+0))}}</td>
                 </tr>
             @endforeach
+            <tr style="border: 0">
+                <td style="border: 0" colspan="5"></td>
+            </tr>
+            <tr style="border: 0">
+                <td style="border: 0" colspan="5"></td>
+            </tr>
+            <tr style="border: 0">
+                <td style="border: 0" colspan="5"></td>
+            </tr>
+            @if ($order->customer_discount)
+                <tr style="font-weight: bold;">
+                    <td colspan="4" style="text-align: inherit;">خصم خاص</td>
+                    <td colspan="1" {{--style="direction: ltr; text-align: center;"--}}>{{$order->customer_discount}}</td>
+                </tr>
+            @endif
             <tr style="font-weight: bold;">
                 <td colspan="4" style="text-align: inherit;">الاجمالي</td>
-                <td colspan="1" {{--style="direction: ltr; text-align: center;"--}}>{{$order->amount}}</td>
+                <td colspan="1" {{--style="direction: ltr; text-align: center;"--}}>{{$order->amount-$order->customer_discount}}</td>
             </tr>
             </tbody>
         </table>

@@ -31,7 +31,8 @@
                             <span class="text-danger">{{__('Cashier')}}:</span> <b>{{$order->user->name}}</b><br>
                             <span class="text-danger">{{__('Customer')}}:</span> <b>{{$order->customer->name}}</b><br>
                             <hr>
-                            <span class="text-danger">{{__('Total')}}:</span> <b>{{$order->amount}}{{__('EGP')}}</b>
+                            <span class="text-danger">{{__('Special discount')}}:</span> <b>{{$order->customer_discount}}{{__('EGP')}}</b><br>
+                            <span class="text-danger">{{__('Total')}}:</span> <b>{{$order->amount - $order->customer_discount}}{{__('EGP')}}</b>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
