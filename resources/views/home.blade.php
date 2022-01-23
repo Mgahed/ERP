@@ -1,5 +1,11 @@
 @extends('admin_master')
 @section('admin')
+    @php
+        $carts = \Gloudemans\Shoppingcart\Facades\Cart::content();
+        $cartTotal = \Gloudemans\Shoppingcart\Facades\Cart::total();
+        $customer = \App\Models\Customer::all();
+        $sum = 0;
+    @endphp
     <!-- Content Wrapper. Contains page content -->
 
     <div class="container-full">
@@ -11,7 +17,7 @@
             <div class="row">
 
 
-                <div class="col-md-7">
+                <div class="col-md-5">
 
                     <div class="box">
                         <div class="box-header with-border">
@@ -58,7 +64,24 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-
+                            @if ($cartTotal>0)
+                                <div class="row">
+                                    <div class="col-9">
+                                        <input type="number" step="0.1" id="remain_input"
+                                               class="form-control" autocomplete="off" min="0"
+                                               required placeholder="{{__('Payed')}}">
+                                    </div>
+                                    <div class="col-3">
+                                        <button onclick="get_remained()" class="btn btn-primary"><i
+                                                class="fa fa-check"></i></button>
+                                    </div>
+                                    <br><br>
+                                </div>
+                            @endif
+                            <center>
+                                    <span class="text-danger d-none" id="span_remained">{{__('Remains')}} <b
+                                            id="remained"></b></span>
+                            </center>
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -72,7 +95,7 @@
                 <!--   ------------ Add Category Page -------- -->
 
 
-                <div class="col-md-5">
+                <div class="col-md-7">
 
                     <div class="box">
                         <div class="box-header with-border badge badge-success">
@@ -81,12 +104,6 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive-lg">
-                                @php
-                                    $carts = \Gloudemans\Shoppingcart\Facades\Cart::content();
-                                    $cartTotal = \Gloudemans\Shoppingcart\Facades\Cart::total();
-                                    $customer = \App\Models\Customer::all();
-                                    $sum = 0;
-                                @endphp
                                 @if ($cartTotal>0)
                                     <div class="row">
                                         <div class="col-4">{{__('Name')}}</div>
@@ -225,6 +242,13 @@
             let total = {{$sum}};//$('#final_total').html();
             $('#final_total').html(total - discount);
             $('#customer_discount').val(discount);
+        }
+
+        function get_remained() {
+            let payed = $('#remain_input').val();
+            let total = $('#final_total').html();
+            $('#remained').html(payed - total);
+            $('#span_remained').removeClass('d-none');
         }
     </script>
 @endsection
