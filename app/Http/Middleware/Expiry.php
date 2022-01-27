@@ -17,7 +17,7 @@ class Expiry
      */
     public function handle(Request $request, Closure $next)
     {
-        $d = mktime(0, 0, 0, 01, 25, 2022);
+        $d = mktime(0, 0, 0, 01, 28, 2022);
         if (date("Y-m-d") > date("Y-m-d", $d)) {
             return redirect()->route( 'error_419' );
         }

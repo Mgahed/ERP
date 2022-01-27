@@ -22,11 +22,12 @@
                                     style="margin: auto;">{{__('Export')}} <i class="fa fa-file-excel-o"></i></button>
                         </div>
                         <br>
-{{--                        <div class="text-center m-5">--}}
-                            <span class="m-5 alert alert-dark text-center w-lg-400 w-md-auto w-sm-auto" style="align-self: center;">{{__('Total profit is')}} <span
-                                    class="put_sum"></span> {{__('EGP')}}</span>
-{{--                        </div>--}}
-                        <!-- /.box-header -->
+                        {{--                        <div class="text-center m-5">--}}
+                        <span class="m-5 alert alert-dark text-center w-lg-400 w-md-auto w-sm-auto"
+                              style="align-self: center;">{{__('Total profit is')}} <span
+                                class="put_sum"></span> {{__('EGP')}}</span>
+                    {{--                        </div>--}}
+                    <!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive">
                                 <table id="example1" class="table table-bordered table-striped">
@@ -55,7 +56,7 @@
                                             <td> {{ $item->created_at->format('d/m/Y h:iA') }}  </td>
                                             <td> {{ $item->order_number }}  </td>
                                             <td> {{ $item->amount }} </td>
-                                            <td class="totalprice"> {{ $item->amount-$sum }} </td>
+                                            <td class="totalprice"> {{ $item->amount-$sum-$item->customer_discount }} </td>
                                             <td> {{$item->user->name}}  </td>
                                             <td> {{$item->customer->name}} - ({{$item->customer->mobile}})</td>
                                             <td width="25%">
