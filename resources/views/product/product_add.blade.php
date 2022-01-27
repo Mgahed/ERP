@@ -26,7 +26,7 @@
 
                                         <div class="row"> <!-- start 1st row  -->
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <h5>{{__('Select Category')}} <span class="text-danger">*</span></h5>
                                                     <div class="controls">
@@ -45,12 +45,12 @@
                                                 </div>
                                             </div> <!-- end col md 4 -->
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <h5>{{__('Name in English')}} <span class="text-danger">*</span>
+                                                    <h5>{{__('Name')}} <span class="text-danger">*</span>
                                                     </h5>
                                                     <div class="controls">
-                                                        <input style="direction: ltr;" type="text" autocomplete="off" name="name_en" class="form-control"
+                                                        <input {{--style="direction: ltr;"--}} type="text" autocomplete="off" name="name_en" class="form-control"
                                                                required="" value="{{old('name_en')}}">
                                                         @error('name_en')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -60,7 +60,7 @@
                                             </div> <!-- end col md 4 -->
 
 
-                                            <div class="col-md-4">
+                                            {{--<div class="col-md-4">
                                                 <div class="form-group">
                                                     <h5>{{__('Name in Arabic')}} <span class="text-danger">*</span></h5>
                                                     <div class="controls">
@@ -71,7 +71,7 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                            </div> <!-- end col md 4 -->
+                                            </div>--}} <!-- end col md 4 -->
 
                                         </div> <!-- end 1st row  -->
 

@@ -13,7 +13,7 @@ class CategoryController extends Controller
     {
         return [
             'name_en' => 'required|unique:categories',
-            'name_ar' => 'required|unique:categories',
+//            'name_ar' => 'required|unique:categories',
         ];
     }
 
@@ -42,8 +42,8 @@ class CategoryController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
         $category = Category::create([
-            'name_en' => strtolower($request->name_en),
-            'name_ar' => $request->name_ar
+            'name_en' => $request->name_en,
+            'name_ar' => $request->name_en
         ]);
         if ($category) {
             $notification = array(

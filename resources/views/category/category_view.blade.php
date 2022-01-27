@@ -79,7 +79,7 @@
 
 
                                     <div class="form-group">
-                                        <h5>{{__('Name in English')}}<span class="text-danger">*</span></h5>
+                                        <h5>{{__('Name')}}<span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" style="direction: ltr;" name="name_en"
                                                    class="form-control" autocomplete="off">
@@ -90,7 +90,7 @@
                                     </div>
 
 
-                                    <div class="form-group">
+                                    {{--<div class="form-group">
                                         <h5>{{__('Name in Arabic')}}<span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" style="direction: rtl;" name="name_ar"
@@ -99,7 +99,7 @@
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                    </div>
+                                    </div>--}}
 
 
                                     <div class="text-xs-right">

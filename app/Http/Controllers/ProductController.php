@@ -21,7 +21,7 @@ class ProductController extends Controller
     {
         return [
             'name_en' => 'required',
-            'name_ar' => 'required',
+//            'name_ar' => 'required',
             'barcode' => 'required|unique:products',
             'quantity' => 'required|numeric|min:0',
             'buy_price' => 'required|numeric|min:0',
@@ -35,9 +35,9 @@ class ProductController extends Controller
     {
         return [
             'name_en.required' => __('This field is required'),
-            'name_ar.required' => __('This field is required'),
+//            'name_ar.required' => __('This field is required'),
             'barcode.required' => __('This field is required'),
-            'name_en.unique' => __('Barcode should be unique'),
+            'barcode.unique' => __('Barcode should be unique'),
             'quantity.required' => __('This field is required'),
             'quantity.numeric' => __('Must be a number'),
             'quantity.min' => __('Must be greater than 0'),
@@ -70,8 +70,8 @@ class ProductController extends Controller
 
 
         $product = Product::create([
-            'name_en' => strtolower($request->name_en),
-            'name_ar' => $request->name_ar,
+            'name_en' => $request->name_en,
+            'name_ar' => $request->name_en,
             'barcode' => $request->barcode,
             'quantity' => $request->quantity,
             'buy_price' => $request->buy_price,
