@@ -23,9 +23,24 @@
                         </div>
                         <br>
                         {{--                        <div class="text-center m-5">--}}
-                        <span class="m-5 alert alert-dark text-center w-lg-400 w-md-auto w-sm-auto"
-                              style="align-self: center;">{{__('Total profit is')}} <span
-                                class="put_sum"></span> {{__('EGP')}}</span>
+                        <div class="text-center">
+                            <div class="row">
+                                <div class="{{--mr-auto p-2--}} col-md-6">
+                                    <span class="m-5 alert alert-danger text-center w-lg-400 w-md-auto w-sm-auto"
+                                          style="align-self: center;">
+                                        {{__('Total profit is')}}
+                                        <span class="put_sum"></span> {{__('EGP')}}</span>
+                                    <br><br>
+                                </div>
+                                <div class="{{--p-2--}} col-md-6">
+                                    <span class="m-5 alert alert-danger text-center w-lg-400 w-md-auto w-sm-auto"
+                                          style="align-self: center;">
+                                        {{__('Total sales')}} <span
+                                            class="put_sales"></span> {{__('EGP')}}</span>
+                                    <br><br>
+                                </div>
+                            </div>
+                        </div>
                     {{--                        </div>--}}
                     <!-- /.box-header -->
                         <div class="box-body">
@@ -55,7 +70,7 @@
                                         <tr>
                                             <td> {{ $item->created_at->format('d/m/Y h:iA') }}  </td>
                                             <td> {{ $item->order_number }}  </td>
-                                            <td> {{ $item->amount }} </td>
+                                            <td class="totalsales"> {{ $item->amount-$item->customer_discount }} </td>
                                             <td class="totalprice"> {{ $item->amount-$sum-$item->customer_discount }} </td>
                                             <td> {{$item->user->name}}  </td>
                                             <td> {{$item->customer->name}} - ({{$item->customer->mobile}})</td>
@@ -109,6 +124,12 @@
                 sum += parseFloat($(this).text());  // Or this.innerHTML, this.innerText
             });
             $('.put_sum').html(sum);
+
+            var sum2 = 0;
+            $('.totalsales').each(function () {
+                sum2 += parseFloat($(this).text());  // Or this.innerHTML, this.innerText
+            });
+            $('.put_sales').html(sum2);
         }
     </script>
 

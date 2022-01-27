@@ -34,7 +34,7 @@
                                         <tr>
                                             <td> {{ $item->created_at->format('d/m/Y h:iA') }}  </td>
                                             <td> {{ $item->order_number }}  </td>
-                                            <td> {{ $item->amount }}{{__('EGP')}}  </td>
+                                            <td> {{ $item->amount-$item->customer_discount }}{{__('EGP')}}  </td>
                                             <td> {{$item->user->name}}  </td>
                                             <td> {{$item->customer->name}}  </td>
 

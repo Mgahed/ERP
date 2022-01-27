@@ -62,28 +62,6 @@
                                 </div>
                             </form>
                         </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            @if ($cartTotal>0)
-                                <div class="row">
-                                    <div class="col-9">
-                                        <input type="number" step="0.1" id="remain_input"
-                                               class="form-control" autocomplete="off" min="0"
-                                               required placeholder="{{__('Payed')}}">
-                                    </div>
-                                    <div class="col-3">
-                                        <button onclick="get_remained()" class="btn btn-primary"><i
-                                                class="fa fa-check"></i></button>
-                                    </div>
-                                    <br><br>
-                                </div>
-                            @endif
-                            <center>
-                                    <span class="text-danger d-none" id="span_remained">{{__('Remains')}} <b
-                                            id="remained"></b></span>
-                            </center>
-                        </div>
-                        <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
 
@@ -169,6 +147,32 @@
                                                     class="fa fa-check"></i></button>
                                         </div>
                                     </div>
+                                    <hr>
+                                    <!-- /.box-header -->
+                                    @if ($cartTotal>0)
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <h4 class="text-center">{{__('Payed')}}</h4>
+                                                <input onkeyup="get_remained()" type="number" step="0.1" id="remain_input"
+                                                       class="form-control" autocomplete="off" min="0"
+                                                       required placeholder="0.00">
+                                            </div>
+                                            {{--<div class="col-2">
+                                                <button onclick="get_remained()" class="btn btn-primary"><i
+                                                        class="fa fa-check"></i></button>
+                                            </div>--}}
+                                            <div class="col-5">
+                                                <h4 class="text-center">{{__('Remains')}}</h4>
+                                                <input style="width: 100%" id="remained" type="number" disabled value="0">
+                                            </div>
+                                            <br><br>
+                                        </div>
+                                    @endif
+                                    {{--<center>
+                                    <span class="text-danger d-none" id="span_remained">{{__('Remains')}} <b
+                                            id="remained"></b></span>
+                                    </center--}}
+                                    <!-- /.box-body -->
                                     <br>
                                     <form action="{{route('make.order')}}" method="post">
                                         @csrf
@@ -247,8 +251,8 @@
         function get_remained() {
             let payed = $('#remain_input').val();
             let total = $('#final_total').html();
-            $('#remained').html(payed - total);
-            $('#span_remained').removeClass('d-none');
+            $('#remained').val(payed - total);
+            // $('#span_remained').removeClass('d-none');
         }
     </script>
 @endsection
