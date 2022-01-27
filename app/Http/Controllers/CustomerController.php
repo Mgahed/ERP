@@ -46,7 +46,8 @@ class CustomerController extends Controller
         if ($customer) {
             $notification = array(
                 'message' => __('Customer added successfully'),
-                'alert-type' => 'success'
+                'alert-type' => 'success',
+                'number' => $request->mobile
             );
             return redirect()->back()->with($notification);
         }

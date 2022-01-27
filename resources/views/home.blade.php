@@ -7,7 +7,55 @@
         $sum = 0;
     @endphp
     <!-- Content Wrapper. Contains page content -->
+    <!-- Modal -->
+    <div class="modal center-modal fade" id="modal-center" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{__('Add customer')}}</h5>
+                    <button onclick="dismiss()" type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('customer.store')}}" method="post">
+                        <div class="controls">
+                            <div class="form-group">
+                                <h5>{{__('Name')}}<span class="text-danger">*</span></h5>
+                                <div class="controls">
+                                    <input type="text" name="name"
+                                           class="form-control" autocomplete="off">
+                                    @error('name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
 
+
+                            <div class="form-group">
+                                <h5>{{__('Mobile')}}<span class="text-danger">*</span></h5>
+                                <div class="controls">
+                                    <input type="text" name="mobile"
+                                           class="form-control" autocomplete="off">
+                                    @error('mobile')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        @csrf
+                        <input type="submit" class="btn btn-rounded btn-primary float-right" value="{{__('Save')}}">
+                    </form>
+                </div>
+                <div class="modal-footer modal-footer-uniform">
+                    <button onclick="dismiss()" type="button" class="btn btn-rounded btn-danger" data-dismiss="modal">
+                        {{__('Close')}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal -->
     <div class="container-full">
         <!-- Content Header (Page header) -->
 
@@ -133,8 +181,8 @@
                                     <div class="row">
                                         <div class="col-9">
                                             <input list="customers" name="customer" id="customer"
-                                                   class="form-control"
-                                                   required placeholder="{{__('Customer number')}}">
+                                                   class="form-control" @if (Session::has('number')) value="{{Session::get('number')}}" @endif
+                                                   required placeholder="{{__('Customer number')}}" autocomplete="off">
                                             <datalist id="customers">
                                                 {{--<option value="{{__('Guest')}}">--}}
                                                 @foreach ($customer as $item)
@@ -201,7 +249,6 @@
                     <!-- /.box -->
                 </div>
 
-
             </div>
             <!-- /.row -->
         </section>
@@ -234,8 +281,8 @@
                     $('input[name="customer"]').prop('disabled', true).css('cursor', 'not-allowed');
                 },
                 error: function () {
-                    $('.customer-name').html('<a class="btn btn-success" href="{{route('all.customers')}}"><i class="mdi mdi-account-plus"></i></a>');
-                    $('input[name="customer"]').prop('disabled', true).css('cursor', 'not-allowed');
+                    $('.customer-name').html('<button onclick="openModal()" type="button" class="btn btn-success" data-target="#modal-center"> <i class="mdi mdi-account-plus"></i> </button>');
+                    //$('input[name="customer"]').prop('disabled', true).css('cursor', 'not-allowed');
                 }
             });
         }
@@ -253,6 +300,17 @@
             let total = $('#final_total').html();
             $('#remained').val(payed - total);
             // $('#span_remained').removeClass('d-none');
+        }
+
+        function openModal() {
+            let number = $('#customer').val();
+            $('input[name="mobile"]').val(number);
+            $('#modal-center').modal('show');
+        }
+
+        function dismiss() {
+            $('#modal-center').modal('hide');
+            $('#modal-center-product').modal('hide');
         }
     </script>
 @endsection
