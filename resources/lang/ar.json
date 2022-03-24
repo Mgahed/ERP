@@ -1040,5 +1040,7 @@
     "Return": "مرتجع",
     "All returns": "جميع المرتجعات",
     "Returns List": "قائمة المرتجعات",
-    "Return operation": "عملية مرتجعة"
+    "Return operation": "عملية مرتجعة",
+    "Return Details": "تفاصيل المرتجع",
+    "Order date": "تاريخ الطلب"
 }

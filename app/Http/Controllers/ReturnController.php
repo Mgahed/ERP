@@ -96,6 +96,6 @@ class ReturnController extends Controller
             Session::forget('order_page_data');
         }
 
-        return redirect()->back();
+        return redirect()->route('view-return', $return_id);
     }
 }

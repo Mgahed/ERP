@@ -12,7 +12,7 @@
 
                     <div class="box">
                         <div class="box-header with-border d-flex">
-                            <h3 class="box-title p-2">{{__('Order Details')}}</h3>
+                            <h3 class="box-title p-2">{{__('Return Details')}}</h3>
                             <div class="ml-auto p-2">
                                 <a href="{{route('print-return',$returns->id)}}"
                                    class="btn btn-warning">{{__('طباعة بالعربية')}}
