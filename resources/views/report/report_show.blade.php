@@ -22,19 +22,19 @@
                                     style="margin: auto;">{{__('Export')}} <i class="fa fa-file-excel-o"></i></button>
                             @isset ($rday)
                                 <a href="{{route('print-report-day',$rday)}}"
-                                   class="btn btn-warning">{{__('print')}}
+                                   class="btn btn-warning">{{__('Print')}}
                                     <i class="fa fa-print"></i>
                                 </a>
                             @endisset
                             @isset ($rmonth)
                                 <a href="{{route('print-report-month',$rmonth)}}"
-                                   class="btn btn-warning">{{__('print')}}
+                                   class="btn btn-warning">{{__('Print')}}
                                     <i class="fa fa-print"></i>
                                 </a>
                             @endisset
                             @isset ($ryear)
                                 <a href="{{route('print-report-year',$ryear)}}"
-                                   class="btn btn-warning">{{__('print')}}
+                                   class="btn btn-warning">{{__('Print')}}
                                     <i class="fa fa-print"></i>
                                 </a>
                             @endisset
