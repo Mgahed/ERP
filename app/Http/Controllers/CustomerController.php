@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
@@ -33,6 +34,12 @@ class CustomerController extends Controller
 
     public function CustomerStore(Request $request)
     {
+        Session::put('order_page_data', [
+            'modal_discount' => $request->modal_discount,
+            'modal_customer' => $request->modal_customer,
+            'modal_final_total' => $request->modal_final_total
+        ]);
+//        return Session::get('order_page_data');
         $rules = $this->getRules();
         $customMSG = $this->getMSG();
         $validator = Validator::make($request->all(), $rules, $customMSG);

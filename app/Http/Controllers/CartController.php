@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -102,6 +103,11 @@ class CartController extends Controller
         } else {
             $id = 1;
         }
+
+        if ($id < 100000000) {
+            $id += 100000000;
+        }
+
         $number = str_pad($id, 9, "0", STR_PAD_LEFT);
 
         $order_id = Order::insertGetId([
@@ -132,6 +138,9 @@ class CartController extends Controller
 
         Cart::destroy();
 
+        if (Session::has('order_page_data')) {
+            Session::forget('order_page_data');
+        }
         if (Auth::user()->role != 'admin') {
             $user = Auth::user()->name;
             $message = " لقد قام " . $user . " بعمل طلب جديد برقم " . $number;

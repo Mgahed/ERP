@@ -40,6 +40,12 @@
                                     @error('mobile')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
+                                    <input type="hidden" name="modal_discount" id="modal_discount"
+                                           class="form-control" autocomplete="off">
+                                    <input type="hidden" name="modal_customer" id="modal_customer"
+                                           class="form-control" autocomplete="off">
+                                    <input type="hidden" name="modal_final_total" id="modal_final_total"
+                                           class="form-control" autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -160,7 +166,7 @@
                                         <div class="col-4"><b>{{__('Total')}}</b></div>
                                         <div class="col-2"></div>
                                         <div class="col-2"></div>
-                                        <div class="col-2"><b id="final_total">{{$sum}}</b></div>
+                                        <div class="col-2"><b id="final_total">{{Session::has('order_page_data')?Session::get('order_page_data')['modal_final_total']:$sum}}</b></div>
                                         <div class="col-2"></div>
                                     </div>
 
@@ -168,8 +174,8 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-9">
-                                            <input type="number" step="0.1" id="discount"
-                                                   class="form-control" autocomplete="off" min="0" value="0"
+                                            <input type="number" step="0.1" id="discount" value="{{Session::has('order_page_data')?Session::get('order_page_data')['modal_discount']:'0'}}"
+                                                   class="form-control" autocomplete="off" min="0"
                                                    required placeholder="{{__('Additional discount')}}">
                                         </div>
                                         <div class="col-3">
@@ -181,7 +187,11 @@
                                     <div class="row">
                                         <div class="col-9">
                                             <input list="customers" name="customer" id="customer"
-                                                   class="form-control" @if (Session::has('number')) value="{{Session::get('number')}}" @endif
+                                                   class="form-control"
+                                                   @if (Session::has('number')) value="{{Session::get('number')}}"
+                                                   @elseif (Session::has('order_page_data'))
+                                                   value="{{Session::get('order_page_data')['modal_customer']}}"
+                                                   @endif
                                                    required placeholder="{{__('Customer number')}}" autocomplete="off">
                                             <datalist id="customers">
                                                 {{--<option value="{{__('Guest')}}">--}}
@@ -201,7 +211,8 @@
                                         <div class="row">
                                             <div class="col-7">
                                                 <h4 class="text-center">{{__('Payed')}}</h4>
-                                                <input onkeyup="get_remained()" type="number" step="0.1" id="remain_input"
+                                                <input onkeyup="get_remained()" type="number" step="0.1"
+                                                       id="remain_input"
                                                        class="form-control" autocomplete="off" min="0"
                                                        required placeholder="0.00">
                                             </div>
@@ -211,7 +222,8 @@
                                             </div>--}}
                                             <div class="col-5">
                                                 <h4 class="text-center">{{__('Remains')}}</h4>
-                                                <input style="width: 100%" id="remained" type="number" disabled value="0">
+                                                <input style="width: 100%" id="remained" type="number" disabled
+                                                       value="0">
                                             </div>
                                             <br><br>
                                         </div>
@@ -220,7 +232,7 @@
                                     <span class="text-danger d-none" id="span_remained">{{__('Remains')}} <b
                                             id="remained"></b></span>
                                     </center--}}
-                                    <!-- /.box-body -->
+                                <!-- /.box-body -->
                                     <br>
                                     <form action="{{route('make.order')}}" method="post">
                                         @csrf
@@ -306,6 +318,14 @@
             let number = $('#customer').val();
             $('input[name="mobile"]').val(number);
             $('#modal-center').modal('show');
+
+            let discount = $('#discount').val();
+            let customer = $('#customer').val();
+            let final_total = $('#final_total').text();
+
+            $("#modal_discount").val(discount);
+            $("#modal_customer").val(customer);
+            $("#modal_final_total").val(final_total);
         }
 
         function dismiss() {

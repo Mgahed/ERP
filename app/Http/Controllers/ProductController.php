@@ -56,7 +56,21 @@ class ProductController extends Controller
     public function AddProduct()
     {
         $categories = Category::orderBy('name_en', 'ASC')->get();
-        return view('product.product_add', compact('categories'));
+        $barcode = Product::latest()->first()->barcode;
+        $substr = substr($barcode, -5);
+        if ($substr != 00001) {
+            $barcode_gen = '0022700001';
+        } else {
+            $check = (int)substr($barcode, 0, 5);
+            if ($check < 227) {
+                $barcode_gen = '0022700001';
+            } else {
+                $int_barcode_gen = $check+1;
+                $barcode_gen = str_pad($int_barcode_gen, 5, "0", STR_PAD_LEFT) . "00001";
+            }
+        }
+
+        return view('product.product_add', compact('categories', 'barcode_gen'));
     }
 
     public function StoreProduct(Request $request)
@@ -143,7 +157,7 @@ class ProductController extends Controller
 
             if (Auth::user()->role != 'admin') {
                 $user = Auth::user()->name;
-                $message = " لقد قام " . $user . " بحذف المنتج "  . $name;
+                $message = " لقد قام " . $user . " بحذف المنتج " . $name;
                 $email_data = [
                     'name' => $user,
                     'msg' => $message
