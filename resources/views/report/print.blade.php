@@ -167,6 +167,8 @@
         <table>
             <thead>
             <tr>
+                <th class="description"></th>
+                <th class="price"></th>
                 <th class="price">رقم الفاتورة</th>
                 <th class="description">الكاشير</th>
                 <th class="description">العميل</th>
@@ -190,6 +192,8 @@
                     @php($tot_discount+=$discount)
                 @endforeach
                 <tr>
+                    <td class="description"></td>
+                    <td class="price"></td>
                     <td class="description">{{ $item->order_number }}</td>
                     <td class="price">{{ $item->user->name }}</td>
                     <td class="price">{{ $item->customer->name }}</td>
@@ -208,18 +212,26 @@
                 <td style="border: 0" colspan="5"></td>
             </tr>
             <tr style="border: 0">
+                <td colspan="1"></td>
+                <td colspan="1"></td>
                 <td colspan="6" style="text-align: inherit;"><b>اجمالي المبيعات</b></td>
                 <td colspan="1"><b>{{$orders->count()}}</b></td>
             </tr>
             <tr style="border: 0">
+                <td colspan="1"></td>
+                <td colspan="1"></td>
                 <td colspan="6" style="text-align: inherit;"><b>الايرادات</b></td>
                 <td colspan="1"><b>{{$total+0}}</b></td>
             </tr>
             <tr style="border: 0">
+                <td colspan="1"></td>
+                <td colspan="1"></td>
                 <td colspan="6" style="text-align: inherit;"><b>المرتجعات</b></td>
                 <td colspan="1"><b>{{$returns_amount+0}}</b></td>
             </tr>
             <tr style="border: 0">
+                <td colspan="1"></td>
+                <td colspan="1"></td>
                 <td colspan="6" style="text-align: inherit;"><b>الارباح</b></td>
                 <td colspan="1"><b>{{$tot_revenue-$returns_amount+0}}</b></td>
             </tr>
