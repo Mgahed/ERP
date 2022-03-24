@@ -20,6 +20,24 @@
                             <h3 class="box-title">{{__('Report')}}</h3>
                             <button type="button" id="export_button" class="btn btn-success"
                                     style="margin: auto;">{{__('Export')}} <i class="fa fa-file-excel-o"></i></button>
+                            @isset ($rday)
+                                <a href="{{route('print-report-day',$rday)}}"
+                                   class="btn btn-warning">{{__('print')}}
+                                    <i class="fa fa-print"></i>
+                                </a>
+                            @endisset
+                            @isset ($rmonth)
+                                <a href="{{route('print-report-month',$rmonth)}}"
+                                   class="btn btn-warning">{{__('print')}}
+                                    <i class="fa fa-print"></i>
+                                </a>
+                            @endisset
+                            @isset ($ryear)
+                                <a href="{{route('print-report-year',$ryear)}}"
+                                   class="btn btn-warning">{{__('print')}}
+                                    <i class="fa fa-print"></i>
+                                </a>
+                            @endisset
                         </div>
                         <br>
                         {{--                        <div class="text-center m-5">--}}

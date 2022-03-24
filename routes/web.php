@@ -98,6 +98,9 @@ Route::group(['middleware' => ['expiry']], function () {
                 Route::get('/search/by/date', [ReportController::class, 'ReportByDate'])->name('search-by-date');
                 Route::get('/search/by/month', [ReportController::class, 'ReportByMonth'])->name('search-by-month');
                 Route::get('/search/by/year', [ReportController::class, 'ReportByYear'])->name('search-by-year');
+                Route::get('/print/by/date/{date}', [ReportController::class, 'PrintDate'])->name('print-report-day');
+                Route::get('/print/by/month/{date}', [ReportController::class, 'PrintMonth'])->name('print-report-month');
+                Route::get('/print/by/year/{date}', [ReportController::class, 'PrintYear'])->name('print-report-year');
             });
 
 //        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

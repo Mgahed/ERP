@@ -62,11 +62,11 @@
                                                 @if ($item->product->deleted_at != null)
                                                     <span class="text-danger">{{__('Deleted product')}}</span>
                                                 @else
-                                                    <a href="{{route('remove.all.items',$item->id)}}"
+                                                    <a href="{{--{{route('remove.all.items',$item->id)}}--}}"{{--todo azbot el mortg3--}}
                                                        class="btn btn-danger" title="Delete item">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
-                                                    <a href="{{route('remove.item',$item->id)}}" class="btn btn-primary"
+                                                    <a href="{{--{{route('remove.item',$item->id)}}--}}" class="btn btn-primary" {{--todo azbot el mortg3--}}
                                                        title="Remove 1">
                                                         <i class="mdi mdi-minus"></i>
                                                     </a>
