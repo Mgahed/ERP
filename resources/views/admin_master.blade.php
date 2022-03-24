@@ -13,6 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{asset('logo.jpeg')}}">
+    <title>{{ config('app.name', 'KikiRiki') }}</title>
 
     @if (app()->getLocale() === 'en')
 

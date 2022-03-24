@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReturnController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -90,6 +91,16 @@ Route::group(['middleware' => ['expiry']], function () {
                 Route::get('/delete/{id}', [OrderController::class, 'DeleteOrder'])->name('delete.order');
                 Route::get('/deleted/all', [OrderController::class, 'DeletedOrders'])->name('deleted.orders');
                 Route::get('/restore/{id}', [OrderController::class, 'RestoreOrder'])->name('restore.order');
+            });
+
+            /*----- returns -----*/
+            Route::prefix('returns')->group(function () {
+                Route::get('/make', [ReturnController::class, 'AllReturns'])->name('make-returns');
+                Route::post('/make', [ReturnController::class, 'MakeReturns'])->name('make-returns-post');
+                Route::get('/all', [ReturnController::class, 'ViewReturns'])->name('all-returns');
+                Route::get('/details/{id}', [ReturnController::class, 'ViewReturn'])->name('view-return');
+                Route::get('/print/{id}', [ReturnController::class, 'PrintReturn'])->name('print-return');
+                Route::get('/print-en/{id}', [ReturnController::class, 'PrintReturnEN'])->name('print-return-en');
             });
 
             /*----- Reports Routes -----*/

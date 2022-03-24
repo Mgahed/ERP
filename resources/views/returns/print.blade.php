@@ -132,121 +132,92 @@
 <center>
     <div class="ticket">
         <span class="centered">
-            {{--<img style="width: 250px; border-radius: 20% !important; position: relative; top: -9px;"
-                 src="{{asset('logo.jpeg')}}" alt="Kiki Riki">--}}
+            <img style="width: 250px; border-radius: 20% !important; position: relative; top: -9px;"
+                 src="{{asset('logo.jpeg')}}" alt="Kiki Riki">
         </span>
         <hr style="border-style: dashed;">
         <div style="font-weight: bold;">
             <table style="border: 0;">
                 <tr style="border: 0;">
-                    <th style="border: 0;"> في الفترة:</th>
-                    <th style="border: 0;"> {{ $through }} </th>
-                </tr>
-                {{--<tr style="border: 0;">
-                    <th style="border: 0;"> اسم العميل:</th>
-                    <th style="border: 0;"> {{ $order->customer->name }} </th>
+                    <th style="border: 0;"> رقم المرتجع:</th>
+                    <th style="border: 0;"> {{ $return->return_number }} </th>
                 </tr>
                 <tr style="border: 0;">
-                    <th style="border: 0;"> التاريخ:</th>
-                    <th style="border: 0;"> {{ $order->created_at->format('d/m/Y') }} </th>
+                    <th style="border: 0;"> اسم العميل:</th>
+                    <th style="border: 0;"> {{ $return->customer->name }} </th>
+                </tr>
+                <tr style="border: 0;">
+                    <th style="border: 0;"> تاريخ المرتجع:</th>
+                    <th style="border: 0;"> {{ $return->created_at->format('d/m/Y') }} </th>
                     <td style="border: 0;"></td>
                     <td style="border: 0;"></td>
                     <td style="border: 0;"></td>
                     <td style="border: 0;"></td>
-                    <th style="border: 0;"> الوقت:</th>
-                    <th style="border: 0;"> {{ $order->created_at->format('h:i A') }} </th>
+                    <th style="border: 0;"> تاريخ الطلب:</th>
+                    <th style="border: 0;"> {{ date('d/m/Y',strtotime($return->order_date)) }} </th>
                 </tr>
                 <tr style="border: 0;">
                     <th style="border: 0;"> الكاشير:</th>
-                    <th style="border: 0;"> {{ $order->user->name }} </th>
-                </tr>--}}
+                    <th style="border: 0;"> {{ $return->user->name }} </th>
+                </tr>
             </table>
+            {{-- التاريخ: {{$order->created_at->format('d/m/Y')}}
+             <br>
+             رقم الفاتورة: {{$order->order_number}}
+             <br>
+             الكاشير: {{$order->user->name}}
+             --}}
         </div>
         <hr style="border-style: dashed;">
         <br>
         <table>
             <thead>
             <tr>
-                <th class="price">رقم الفاتورة</th>
-                <th class="description">الكاشير</th>
-                <th class="description">العميل</th>
-                <th class="description">خصم خاص</th>
-                <th class="description">خصم المنتجات</th>
-                <th class="description">الاجمالي</th>
-                <th class="description">الربح</th>
+                <th class="quantity">الكمية</th>
+                <th></th>
+                <th></th>
+                <th class="description">الاسم</th>
             </tr>
             </thead>
             <tbody>
-            <?php $total = 0; $tot_revenue = 0; $tot_discount = 0; ?>
-            @foreach ($orders as $item)
-                @php
-                    $order_item = \App\Models\OrderItem::where('order_id',$item->id)->get();
-                @endphp
-                @php($sum = 0)
-                @php($discount = 0)
-                @foreach($order_item as $o_item)
-                    @php($sum+=$o_item->price_of_buy*$o_item->qty)
-                    @php($discount+=$o_item->discount*$o_item->qty)
-                    @php($tot_discount+=$discount)
-                @endforeach
+            @foreach ($return->returnItem as $item)
                 <tr>
-                    <td class="description">{{ $item->order_number }}</td>
-                    <td class="price">{{ $item->user->name }}</td>
-                    <td class="price">{{ $item->customer->name }}</td>
-                    <td class="price">{{ $item->customer_discount + 0 }}</td>
-                    <td class="price">{{$discount}}</td>
-                    @php($total += $item->amount-$item->customer_discount + 0)
-                    <td class="price">{{ $item->amount-$item->customer_discount + 0 }}</td>
-                    @php($tot_revenue += $item->amount-$sum-$item->customer_discount + 0)
-                    <td class="price">{{ $item->amount-$sum-$item->customer_discount + 0 }}</td>
+                    <td class="quantity">{{$item->qty+0}}</td>
+                    <td></td>
+                    <td></td>
+                    <td class="description">{{$item->product->name_ar}}</td>
                 </tr>
             @endforeach
             <tr style="border: 0">
-                <td style="border: 0" colspan="5"></td>
+                <td style="border: 0" colspan="4"></td>
             </tr>
             <tr style="border: 0">
-                <td style="border: 0" colspan="5"></td>
+                <td style="border: 0" colspan="4"></td>
             </tr>
             <tr style="border: 0">
-                <td colspan="6" style="text-align: inherit;"><b>اجمالي المبيعات</b></td>
-                <td colspan="1"><b>{{$orders->count()}}</b></td>
+                <td style="border: 0" colspan="4"></td>
             </tr>
-            <tr style="border: 0">
-                <td colspan="6" style="text-align: inherit;"><b>الايرادات</b></td>
-                <td colspan="1"><b>{{$total+0}}</b></td>
-            </tr>
-            <tr style="border: 0">
-                <td colspan="6" style="text-align: inherit;"><b>المرتجعات</b></td>
-                <td colspan="1"><b>{{$returns_amount+0}}</b></td>
-            </tr>
-            <tr style="border: 0">
-                <td colspan="6" style="text-align: inherit;"><b>الارباح</b></td>
-                <td colspan="1"><b>{{$tot_revenue-$returns_amount+0}}</b></td>
-            </tr>
-            <tr style="border: 0">
-                <td style="border: 0" colspan="5"></td>
-            </tr>
-            <tr style="border: 0">
-                <td style="border: 0" colspan="5"></td>
-            </tr>
-            <tr style="border: 0">
-                <td style="border: 0" colspan="5"></td>
+
+            <tr style="font-weight: bold;">
+                <td colspan="3" style="text-align: inherit;">المبلغ المرتجع</td>
+                <td colspan="1" {{--style="direction: ltr; text-align: center;"--}}>{{$return->amount}}</td>
             </tr>
             </tbody>
         </table>
-        {{--<p class="centered">
-            يمكن استبدال او استرجاع المشتريات خلال 14 يوم من
+        <p class="centered">
+            {{--يمكن استبدال او استرجاع المشتريات خلال 14 يوم من
             <br>
             تاريخ الشراء اذا شاب السلعة عيب في الصناعة وفقا للمادة
             <br>
             8 من قانون حماية المستهلك على ان تكون في نفس حالة شرائها
-            <br><br>
+            <br><br>--}}
+            <br>
             شكرا لتعاملكم معنا!
             <br>
             سعدنا بزيارتكم!
             <br><br>
             تواصل معنا عبر:
-            <br>رقمنا: 01063001503</p>--}}
+            <br>رقمنا: 01063001503</p>
     </div>
     <button id="btnPrint" class="hidden-print btn btn-success">طباعة</button>
     <a href="javascript:history.back()" class="hidden-print btn btn-danger">رجوع</a>

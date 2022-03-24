@@ -22,6 +22,24 @@
                     <span>{{__('Selling operation')}}</span>
                 </a>
             </li>
+            <li class="treeview {{Request::is(app()->getLocale().'/returns/*') ? 'active' : ''}}">
+                <a href="#">
+                    <i class="fa fa-shopping-bag"></i> <span>{{__('Returns')}}</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{Request::is(app()->getLocale().'/returns/make') ? 'active' : ''}}"><a
+                            href="{{route('make-returns')}}"><i class="ti-more"></i>{{__('Return')}}</a>
+                    </li>
+                    @if (auth()->user()->role === 'admin')
+                        <li class="{{Request::is(app()->getLocale().'/returns/all') ? 'active' : ''}}"><a
+                                href="{{route('all-returns')}}"><i class="ti-more"></i>{{__('All returns')}}</a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
             <li class="treeview {{Request::is(app()->getLocale().'/order/*') ? 'active' : ''}}">
                 <a href="#">
                     <i class="fa fa-shopping-bag"></i> <span>{{__('Orders')}}</span>

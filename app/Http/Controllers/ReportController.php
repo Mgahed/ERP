@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Retorn;
 use DateTime;
 use Illuminate\Http\Request;
 
@@ -53,7 +54,8 @@ class ReportController extends Controller
         $formatDate = $date;
         $orders = Order::with('orderItem')->with('user')->with('customer')->whereDate('created_at', $formatDate)->latest()->get();
 //        return $orders;
-        return view('report.print', compact('orders', 'through'));
+        $returns_amount = Retorn::whereDate('created_at', $formatDate)->latest()->sum('amount');
+        return view('report.print', compact('orders', 'through', 'returns_amount'));
     }
 
     public function PrintMonth($month)
@@ -63,13 +65,15 @@ class ReportController extends Controller
         $month = $date->format('m');
         $year = $date->format('Y');
         $orders = Order::with('orderItem')->with('user')->with('customer')->whereMonth('created_at', $month)->whereYear('created_at', $year)->latest()->get();
-        return view('report.print', compact('orders', 'through'));
+        $returns_amount = Retorn::whereMonth('created_at', $month)->whereYear('created_at', $year)->latest()->sum('amount');
+        return view('report.print', compact('orders', 'through', 'returns_amount'));
     }
 
     public function PrintYear($year)
     {
         $through = $year;
         $orders = Order::with('orderItem')->with('user')->with('customer')->whereYear('created_at', $year)->latest()->get();
-        return view('report.print', compact('orders', 'through'));
+        $returns_amount = Retorn::whereYear('created_at', $year)->latest()->sum('amount');
+        return view('report.print', compact('orders', 'through', 'returns_amount'));
     }
 }
