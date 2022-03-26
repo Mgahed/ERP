@@ -152,6 +152,6 @@ class CartController extends Controller
             Mail::to('ahmedalaa123V@gmail.com')->send(new OrderMail($email_data));
         }
 
-        return redirect()->route('view-order', $order_id);
+        return redirect()->route('print-order', $order_id);
     }
 }
