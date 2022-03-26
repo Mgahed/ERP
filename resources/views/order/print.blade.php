@@ -57,6 +57,31 @@
             box-shadow: 0 0 0 0.25rem rgba(225, 83, 97, 0.5);
         }
 
+        .btn-primary {
+            color: #fff;
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+        .btn-primary:hover {
+            color: #fff;
+            background-color: #0b5ed7;
+            border-color: #0a58ca;
+        }
+        .btn-check:focus + .btn-primary, .btn-primary:focus {
+            color: #fff;
+            background-color: #0b5ed7;
+            border-color: #0a58ca;
+            box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
+        }
+        .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
+            color: #fff;
+            background-color: #0a58ca;
+            border-color: #0a53be;
+        }
+        .btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
+        }
+
         .btn {
 
         }
@@ -226,7 +251,9 @@
             <br>رقمنا: 01063001503</p>
     </div>
     <button id="btnPrint" class="hidden-print btn btn-success">طباعة</button>
-    <a href="javascript:history.back()" class="hidden-print btn btn-danger">رجوع</a>
+    <a href="/" class="hidden-print btn btn-danger">رجوع</a>
+    <br><br>
+    <a href="{{route('print-order-en',$order->id)}}" class="hidden-print btn btn-primary">Print English</a>
 </center>
 <script>
     const $btnPrint = document.querySelector("#btnPrint");

@@ -54,7 +54,7 @@ class ReportController extends Controller
         $formatDate = $date;
         $orders = Order::with('orderItem')->with('user')->with('customer')->whereDate('created_at', $formatDate)->latest()->get();
 //        return $orders;
-        $returns_amount = Retorn::whereDate('created_at', $formatDate)->latest()->sum('amount');
+        $returns_amount = Retorn::whereDate('order_date', $formatDate)->latest()->sum('amount');
         return view('report.print', compact('orders', 'through', 'returns_amount'));
     }
 
@@ -65,7 +65,7 @@ class ReportController extends Controller
         $month = $date->format('m');
         $year = $date->format('Y');
         $orders = Order::with('orderItem')->with('user')->with('customer')->whereMonth('created_at', $month)->whereYear('created_at', $year)->latest()->get();
-        $returns_amount = Retorn::whereMonth('created_at', $month)->whereYear('created_at', $year)->latest()->sum('amount');
+        $returns_amount = Retorn::whereMonth('order_date', $month)->whereYear('order_date', $year)->latest()->sum('amount');
         return view('report.print', compact('orders', 'through', 'returns_amount'));
     }
 
@@ -73,7 +73,7 @@ class ReportController extends Controller
     {
         $through = $year;
         $orders = Order::with('orderItem')->with('user')->with('customer')->whereYear('created_at', $year)->latest()->get();
-        $returns_amount = Retorn::whereYear('created_at', $year)->latest()->sum('amount');
-        return view('report.print', compact('orders', 'through', 'returns_amount'));
+        $returns_amount = Retorn::whereYear('order_date', $year)->latest()->sum('amount');
+            return view('report.print', compact('orders', 'through', 'returns_amount'));
     }
 }
