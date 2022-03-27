@@ -232,6 +232,12 @@
             <tr style="border: 0">
                 <td colspan="1"></td>
                 <td colspan="1"></td>
+                <td colspan="6" style="text-align: inherit;"><b>المبلغ النهائي</b></td>
+                <td colspan="1"><b>{{$total-$returns_amount+0}}</b></td>
+            </tr>
+            <tr style="border: 0">
+                <td colspan="1"></td>
+                <td colspan="1"></td>
                 <td colspan="6" style="text-align: inherit;"><b>الارباح</b></td>
                 <td colspan="1"><b>{{$tot_revenue-$returns_amount+0}}</b></td>
             </tr>

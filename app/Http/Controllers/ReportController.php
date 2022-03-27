@@ -23,7 +23,8 @@ class ReportController extends Controller
         $formatDate = $date;/*->format('d F Y');*/
         // return $formatDate;
         $orders = Order::/*with('orderItem.product')->*/ with('user')->with('customer')->whereDate('created_at', $formatDate)->latest()->get();
-        return view('report.report_show', compact('orders', 'rday'));
+        $returns_amount = Retorn::whereDate('order_date', $formatDate)->latest()->sum('amount');
+        return view('report.report_show', compact('orders', 'rday', 'returns_amount'));
     } // end mehtod
 
 
@@ -35,7 +36,8 @@ class ReportController extends Controller
         $month = $date->format('m');
         $year = $date->format('Y');
         $orders = Order::/*with('orderItem.product')->*/ with('user')->with('customer')->whereMonth('created_at', $month)->whereYear('created_at', $year)->latest()->get();
-        return view('report.report_show', compact('orders', 'rmonth'));
+        $returns_amount = Retorn::whereMonth('order_date', $month)->whereYear('order_date', $year)->latest()->sum('amount');
+        return view('report.report_show', compact('orders', 'rmonth', 'returns_amount'));
     } // end mehtod
 
 
@@ -44,7 +46,8 @@ class ReportController extends Controller
         $year = $request->year;
         $ryear = $year;
         $orders = Order::with('user')->with('customer')->whereYear('created_at', $year)->latest()->get();
-        return view('report.report_show', compact('orders', 'ryear'));
+        $returns_amount = Retorn::whereYear('order_date', $year)->latest()->sum('amount');
+        return view('report.report_show', compact('orders', 'ryear', 'returns_amount'));
     } // end mehtod
 
     public function PrintDate($day)
@@ -74,6 +77,6 @@ class ReportController extends Controller
         $through = $year;
         $orders = Order::with('orderItem')->with('user')->with('customer')->whereYear('created_at', $year)->latest()->get();
         $returns_amount = Retorn::whereYear('order_date', $year)->latest()->sum('amount');
-            return view('report.print', compact('orders', 'through', 'returns_amount'));
+        return view('report.print', compact('orders', 'through', 'returns_amount'));
     }
 }

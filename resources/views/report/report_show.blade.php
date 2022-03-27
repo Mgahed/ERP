@@ -43,18 +43,25 @@
                         {{--                        <div class="text-center m-5">--}}
                         <div class="text-center">
                             <div class="row">
-                                <div class="{{--mr-auto p-2--}} col-md-6">
+                                <div class="{{--mr-auto p-2--}} col-md-4">
                                     <span class="m-5 alert alert-danger text-center w-lg-400 w-md-auto w-sm-auto"
                                           style="align-self: center;">
                                         {{__('Total profit is')}}
                                         <span class="put_sum"></span> {{__('EGP')}}</span>
                                     <br><br>
                                 </div>
-                                <div class="{{--p-2--}} col-md-6">
+                                <div class="{{--p-2--}} col-md-4">
                                     <span class="m-5 alert alert-danger text-center w-lg-400 w-md-auto w-sm-auto"
                                           style="align-self: center;">
                                         {{__('Total sales')}} <span
                                             class="put_sales"></span> {{__('EGP')}}</span>
+                                    <br><br>
+                                </div>
+                                <div class="{{--p-2--}} col-md-4">
+                                    <span class="m-5 alert alert-danger text-center w-lg-400 w-md-auto w-sm-auto"
+                                          style="align-self: center;">
+                                        {{__('Total')}} <span
+                                            class="final_total"></span> {{__('EGP')}}</span>
                                     <br><br>
                                 </div>
                             </div>
@@ -77,6 +84,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <?php $total = $tot_revenue = 0; ?>
                                     @foreach($orders as $item)
                                         @php
                                             $order_item = \App\Models\OrderItem::where('order_id',$item->id)->get();
@@ -85,6 +93,10 @@
                                         @foreach($order_item as $o_item)
                                             @php($sum+=$o_item->price_of_buy*$o_item->qty)
                                         @endforeach
+                                        <?php
+                                        $total += $item->amount - $item->customer_discount + 0;
+                                        $tot_revenue += $item->amount - $sum - $item->customer_discount + 0;
+                                        ?>
                                         <tr>
                                             <td> {{ $item->created_at->format('d/m/Y h:iA') }}  </td>
                                             <td> {{ $item->order_number }}  </td>
@@ -114,7 +126,11 @@
 
                 </div>
                 <!-- /.col -->
-
+                <span class="d-none">
+                    <span id="total">{{$total}}</span>
+                    <span id="tot_revenue">{{$tot_revenue}}</span>
+                    <span id="returns_amount">{{$returns_amount}}</span>
+                </span>
 
             </div>
             <!-- /.row -->
@@ -141,7 +157,7 @@
         setInterval(oneSecondFunction, 1000)
 
         function oneSecondFunction() {
-            var sum = 0;
+            /*var sum = 0;
             $('.totalprice').each(function () {
                 sum += parseFloat($(this).text());  // Or this.innerHTML, this.innerText
             });
@@ -151,7 +167,14 @@
             $('.totalsales').each(function () {
                 sum2 += parseFloat($(this).text());  // Or this.innerHTML, this.innerText
             });
-            $('.put_sales').html(sum2);
+            $('.put_sales').html(sum2);*/
+            let total = $("#total").text();
+            let tot_revenue = $("#tot_revenue").text();
+            let returns_amount = $("#returns_amount").text();
+            $(".put_sales").html(total);
+            $(".put_sum").html(tot_revenue);
+            $(".final_total").html(total - returns_amount);
+
         }
     </script>
 

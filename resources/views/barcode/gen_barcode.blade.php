@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
         .outline {
-            width: 100%;
+            /*width: 100%;*/
             margin-left: 7px;
             padding: 13px;
-            border: 2px solid;
-            border-radius: 14px;
+            /*border: 2px solid;*/
+            /*border-radius: 14px;*/
         }
 
         .btn {
@@ -141,14 +141,13 @@
         <span class="centered">
             {{--<img style="width: 250px; border-radius: 20% !important; position: relative; top: -9px;"
                  src="{{asset('logo.jpeg')}}" alt="Kiki Riki">--}}
+                <b>{{config('app.name', 'KikiRiki')}}</b>
+                &ensp;
+                <b>{{$product_price+0}} LE</b>
                 <img class="outline"
                      src="data:image/png;base64, {{DNS1D::getBarcodePNG($barcode_gen, 'CODABAR')}}" alt="barcode"/>
-            <span style="position: relative; bottom: 18px;"> {{$barcode_number}} </span>
-            <br>
-            <span style="display: flex; position: relative; top: -10px;">
-                <b style="padding-left: 10px;">{{$product_name}}</b>
-                <b style="margin-right: auto; white-space: nowrap;">{{config('app.name', 'KikiRiki')}}</b>
-            </span>
+                <span style="border: 2px solid;" > {{str_pad($barcode_number, 5, "0", STR_PAD_LEFT)}} </span>
+                <b style="padding-right: 5px;">{{$product_name}}</b>
 {{--            <center>{!! DNS1D::getBarcodeHTML('4445645656', 'CODABAR') !!}</center>--}}
         </span>
     </div>

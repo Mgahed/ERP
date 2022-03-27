@@ -85,8 +85,9 @@ class ProductController extends Controller
         }
         $barcode_number = (int)substr($barcode_gen, 0, 5);
         $product_name = $latest_product->name_ar;
+        $product_price = $latest_product->sell_price;
 
-        return view('barcode.gen_barcode', compact('barcode_gen', 'barcode_number', 'product_name'));
+        return view('barcode.gen_barcode', compact('barcode_gen', 'barcode_number', 'product_name', 'product_price'));
     }
 
     public function StoreProduct(Request $request)
