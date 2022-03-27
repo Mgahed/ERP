@@ -95,9 +95,15 @@ class CartController extends Controller
 
     public function makeOrder(Request $request)
     {
-        $carts = \Gloudemans\Shoppingcart\Facades\Cart::content();
-
-        $last_order = Order::orderBy('id', 'DESC')->first();
+        if (!count(Cart::content())) {
+            $notification = [
+                'message' => __('You took too long to make this order please add products again'),
+                'alert-type' => 'error'
+            ];
+            return redirect()->back()->with($notification);
+        }
+        $carts = Cart::content();
+        $last_order = Order::withTrashed()->orderBy('id', 'DESC')->first();
         if ($last_order) {
             $id = $last_order->id + 1;
         } else {

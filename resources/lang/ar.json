@@ -1042,5 +1042,6 @@
     "Returns List": "قائمة المرتجعات",
     "Return operation": "عملية مرتجعة",
     "Return Details": "تفاصيل المرتجع",
-    "Order date": "تاريخ الطلب"
+    "Order date": "تاريخ الطلب",
+    "You took too long to make this order please add products again": "لقد استغرقت وقتًا طويلاً لإجراء هذا الطلب ، يُرجى إضافة المنتجات مرة أخرى"
 }
