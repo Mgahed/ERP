@@ -43,10 +43,10 @@
                                             <td width="25%">
                                                 <a href="{{ route('view-return',$item->id) }}"
                                                     class="btn btn-info" title="Details"><i class="fa fa-eye"></i> </a>
-                                                {{--<a href="{{route('delete.order',$item->id)}}" class="btn btn-danger"
-                                                    title="Delete order">
+                                                <a href="{{route('delete.return',$item->id)}}" class="btn btn-danger"
+                                                    title="Delete">
                                                     <i class="fa fa-trash"></i>
-                                                </a>--}}
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

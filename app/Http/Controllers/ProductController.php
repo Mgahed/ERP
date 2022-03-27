@@ -65,12 +65,28 @@ class ProductController extends Controller
             if ($check < 227) {
                 $barcode_gen = '0022700001';
             } else {
-                $int_barcode_gen = $check+1;
+                $int_barcode_gen = $check + 1;
                 $barcode_gen = str_pad($int_barcode_gen, 5, "0", STR_PAD_LEFT) . "00001";
             }
         }
 
         return view('product.product_add', compact('categories', 'barcode_gen'));
+    }
+
+    public function barcodegen($id)
+    {
+        $latest_product = Product::findOrFail($id);
+        $barcode = $latest_product->barcode;
+        $substr = substr($barcode, -5);
+        if ($substr == 00001) {
+            $barcode_gen = $barcode;
+        } else {
+            $barcode_gen = str_pad($barcode, 5, "0", STR_PAD_LEFT) . "00001";
+        }
+        $barcode_number = (int)substr($barcode_gen, 0, 5);
+        $product_name = $latest_product->name_ar;
+
+        return view('barcode.gen_barcode', compact('barcode_gen', 'barcode_number', 'product_name'));
     }
 
     public function StoreProduct(Request $request)

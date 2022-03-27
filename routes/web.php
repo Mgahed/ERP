@@ -71,6 +71,7 @@ Route::group(['middleware' => ['expiry']], function () {
                 Route::get('/deleted', [ProductController::class, 'DeletedProducts'])->name('deleted.products');
                 Route::get('/restore/{id}', [ProductController::class, 'RestoreProduct'])->name('product.restore');
                 Route::get('/in-notification', [ProductController::class, 'ProductNotification'])->name('in.notification');
+                Route::get('/barcode-gen/{id}', [ProductController::class, 'barcodegen'])->name('barcode');
             });
 
             /*----- Users -----*/
@@ -99,6 +100,7 @@ Route::group(['middleware' => ['expiry']], function () {
                 Route::post('/make', [ReturnController::class, 'MakeReturns'])->name('make-returns-post');
                 Route::get('/all', [ReturnController::class, 'ViewReturns'])->name('all-returns');
                 Route::get('/details/{id}', [ReturnController::class, 'ViewReturn'])->name('view-return');
+                Route::get('/delete/{id}', [ReturnController::class, 'DeleteReturn'])->name('delete.return');
                 Route::get('/print/{id}', [ReturnController::class, 'PrintReturn'])->name('print-return');
                 Route::get('/print-en/{id}', [ReturnController::class, 'PrintReturnEN'])->name('print-return-en');
             });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DeleteProductMail;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
@@ -10,7 +11,9 @@ use App\Models\RetornItem;
 use Carbon\Carbon;
 use \Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class ReturnController extends Controller
@@ -35,6 +38,31 @@ class ReturnController extends Controller
             $q->withTrashed();
         }])->with('user')->with('customer')->findOrFail($id);
         return view('returns.return', compact('returns'));
+    }
+
+    public function DeleteReturn($id)
+    {
+        $return = Retorn::with('returnItem.product')->findOrFail($id);
+        $items = $return->toArray();
+//        return $return;
+        foreach ($items['return_item'] as $item) {
+            Product::where('id', $item['product']['id'])->update(['quantity' => DB::raw('quantity-' . $item['qty'])]);
+        }
+        RetornItem::where('return_id', $id)->delete();
+        $delete = $return->delete();
+        if ($delete) {
+            $notification = [
+                'message' => __('Deleted successfully'),
+                'alert-type' => 'success'
+            ];
+
+            return redirect()->back()->with($notification);
+        }
+        $notification = [
+            'message' => __('Can not delete product'),
+            'alert-type' => 'error'
+        ];
+        return redirect()->back()->with($notification);
     }
 
     public function PrintReturn($id)

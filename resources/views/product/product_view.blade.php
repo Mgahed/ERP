@@ -72,7 +72,9 @@
                                                    title="Delete Data" id="delete">
                                                     <i class="fa fa-trash"></i></a>
 
-
+                                                <a href="{{ route('barcode',$item->id) }}" class="btn btn-default"
+                                                   title="Barcode">
+                                                    <i class="fa fa-barcode"></i></a>
                                             </td>
 
                                         </tr>
