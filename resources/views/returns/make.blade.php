@@ -193,7 +193,7 @@
                                                value="" type="number" step="0.01"
                                                required placeholder="{{__('Amount')}}" autocomplete="off">
                                         <br>
-                                        <input type="date" name="order_date" class="form-control" required>
+                                        <input type="date" name="order_date" min="{{\Carbon\Carbon::today()->subDays(14)->format('Y-m-d')}}" max="{{\Carbon\Carbon::today()->format('Y-m-d')}}" class="form-control" required>
                                         <br>
                                         <div class="d-flex">
                                             <div class="text-left">
