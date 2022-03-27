@@ -95,6 +95,10 @@
                                             <td width="25%">
                                                 <a href="{{ route('view-order',$item->id) }}"
                                                    class="btn btn-info" title="Details"><i class="fa fa-eye"></i> </a>
+                                                <a href="{{route('delete.order',$item->id)}}" class="btn btn-danger"
+                                                   title="Delete order">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
