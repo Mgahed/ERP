@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendMails;
 use App\Mail\LoginMail;
 use App\Mail\OrderMail;
 use App\Models\Order;
@@ -154,8 +155,7 @@ class CartController extends Controller
                 'name' => $user,
                 'msg' => $message
             ];
-
-            Mail::to('ahmedalaa123V@gmail.com')->send(new OrderMail($email_data));
+            $this->dispatch(new SendMails($email_data));
         }
 
         return redirect()->route('print-order', $order_id);
