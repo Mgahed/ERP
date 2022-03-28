@@ -109,7 +109,7 @@
                                 <br>
 
                                 <div class="text-center">
-                                    <input type="submit" class="btn btn-info mb-5"
+                                    <input type="submit" class="btn btn-info mb-5" style="display: none;"
                                            value="{{__('Add')}}">
                                     {{--<button type="submit" class="btn btn-info mb-5 material-icons">{{__('Add')}} <i
                                             class="mdi mdi-cart-plus"></i></button>--}}
@@ -166,7 +166,9 @@
                                         <div class="col-4"><b>{{__('Total')}}</b></div>
                                         <div class="col-2"></div>
                                         <div class="col-2"></div>
-                                        <div class="col-2"><b id="final_total">{{Session::has('order_page_data')?Session::get('order_page_data')['modal_final_total']:$sum}}</b></div>
+                                        <div class="col-2"><b
+                                                id="final_total">{{Session::has('order_page_data')?Session::get('order_page_data')['modal_final_total']:$sum}}</b>
+                                        </div>
                                         <div class="col-2"></div>
                                     </div>
 
@@ -174,7 +176,8 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-9">
-                                            <input type="number" step="0.1" id="discount" value="{{Session::has('order_page_data')?Session::get('order_page_data')['modal_discount']:'0'}}"
+                                            <input type="number" step="0.1" id="discount"
+                                                   value="{{Session::has('order_page_data')?Session::get('order_page_data')['modal_discount']:'0'}}"
                                                    class="form-control" autocomplete="off" min="0"
                                                    required placeholder="{{__('Additional discount')}}">
                                         </div>
@@ -241,7 +244,8 @@
                                         <input type="hidden" id="sum" name="sum" value="{{$sum}}">
                                         <div class="d-flex">
                                             <div class="text-left">
-                                                <input type="submit" class="btn btn-rounded btn-primary mb-5 d-none"
+                                                <input id="confirm" type="submit"
+                                                       class="btn btn-rounded btn-primary mb-5 d-none"
                                                        value="{{__('Confirm')}}">
                                             </div>
 
@@ -291,6 +295,10 @@
                     $('.customer-name').html('<span class="text-danger">' + data.name + '</span>');
                     $('.d-none').removeClass('d-none');
                     $('input[name="customer"]').prop('disabled', true).css('cursor', 'not-allowed');
+
+                    $('#confirm').click(function () {
+                        $('#confirm').css('pointer-events', 'none');
+                    });
                 },
                 error: function () {
                     $('.customer-name').html('<button onclick="openModal()" type="button" class="btn btn-success" data-target="#modal-center"> <i class="mdi mdi-account-plus"></i> </button>');

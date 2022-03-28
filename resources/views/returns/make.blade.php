@@ -109,7 +109,7 @@
                                 <br>
 
                                 <div class="text-center">
-                                    <input type="submit" class="btn btn-info mb-5"
+                                    <input type="submit" class="btn btn-info mb-5" style="display: none;"
                                            value="{{__('Add')}}">
                                     {{--<button type="submit" class="btn btn-info mb-5 material-icons">{{__('Add')}} <i
                                             class="mdi mdi-cart-plus"></i></button>--}}
