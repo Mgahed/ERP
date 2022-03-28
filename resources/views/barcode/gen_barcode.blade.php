@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
+        * {
+            font-size: 17px;
+        }
+
         .outline {
             /*width: 100%;*/
-            margin-left: 7px;
-            padding: 13px;
+            margin-left: 15px;
+            margin-right: 15px;
+            padding: 15px;
             /*border: 2px solid;*/
             /*border-radius: 14px;*/
         }
@@ -69,7 +74,7 @@
         }
 
         * {
-            font-size: 12px;
+            font-size: 19px;
             font-family: 'Times New Roman';
         }
 
@@ -132,6 +137,11 @@
                 display: none !important;
             }
         }
+        /*@media print {
+            body {
+                margin: 0.03in 0.4in 0.57in 0.49in;
+            }
+        }*/
     </style>
     <title>Receipt example</title>
 </head>
@@ -141,13 +151,18 @@
         <span class="centered">
             {{--<img style="width: 250px; border-radius: 20% !important; position: relative; top: -9px;"
                  src="{{asset('logo.jpeg')}}" alt="Kiki Riki">--}}
+            <span style="float: left">
                 <b>{{config('app.name', 'KikiRiki')}}</b>
                 &ensp;
-                <b>{{$product_price+0}} LE</b>
-                <img class="outline"
-                     src="data:image/png;base64, {{DNS1D::getBarcodePNG($barcode_gen, 'CODABAR')}}" alt="barcode"/>
-                <span style="border: 2px solid;" > {{str_pad($barcode_number, 5, "0", STR_PAD_LEFT)}} </span>
-                <b style="padding-right: 5px;">{{$product_name}}</b>
+                <b style="/*font-size: 18px;*/">{{$product_price+0}} LE</b>{{--0.03 - 0.4 - 0.57 - 0.49--}}
+            </span>
+                <img alt='Barcode Generator TEC-IT'
+                     src='https://barcode.tec-it.com/barcode.ashx?data={{$barcode_gen}}&code=Code25IL&dmsize=Default'/>
+                {{--<img class="outline"
+                     src="data:image/png;base64, {{DNS1D::getBarcodePNG($barcode_gen, 'CODABAR')}}" alt="barcode"/>--}}
+            {{--                <span style="border: 2px solid;" > {{str_pad($barcode_number, 5, "0", STR_PAD_LEFT)}} </span>--}}
+                <b>{{$product_name}}</b>
+            <br><br><br>
 {{--            <center>{!! DNS1D::getBarcodeHTML('4445645656', 'CODABAR') !!}</center>--}}
         </span>
     </div>

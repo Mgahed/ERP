@@ -87,6 +87,24 @@ class ProductController extends Controller
         $product_name = $latest_product->name_ar;
         $product_price = $latest_product->sell_price;
 
+        /*try {
+            $print_data = '^XA
+^FO250,40^A0N,70,70^FDLPN^FS
+^FO30,120^A0N,50,50
+^BCN,100,N,N,N
+^FD1000001^SFddddddd^FS
+^FO200,300^A0N,50,50
+^FD1000001^SFddddddd^FS
+^PQ50
+^XZ';
+            $fp = pfsockopen("127.0.0.1", 9100);
+            fputs($fp, $print_data);
+            fclose($fp);
+
+            return 'Successfully Printed';
+        } catch (\Exception $e) {
+            return 'Caught exception: ' . $e->getMessage() . "\n";
+        }*/
         return view('barcode.gen_barcode', compact('barcode_gen', 'barcode_number', 'product_name', 'product_price'));
     }
 

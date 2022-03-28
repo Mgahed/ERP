@@ -131,15 +131,15 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <h5>{{__('Barcode')}} <span class="text-danger">*</span>
-                                                        {{--@if ($barcode_gen)
+                                                        @if ($barcode_gen)
                                                             <b class="text-danger">{{(int)substr($barcode_gen, 0, 5)}}</b>
-                                                        @endif--}}
+                                                        @endif
                                                     </h5>
                                                     <div class="controls">
                                                         <input type="text" autocomplete="off" name="barcode"
                                                                class="form-control"
                                                                required=""
-                                                               value="{{/*$barcode_gen?$barcode_gen:*/old('barcode')}}">
+                                                               value="{{$barcode_gen?$barcode_gen:old('barcode')}}">
                                                         @error('barcode')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
