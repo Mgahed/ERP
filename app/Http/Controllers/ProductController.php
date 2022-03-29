@@ -133,7 +133,10 @@ class ProductController extends Controller
             'message' => __('Product added successfully'),
             'alert-type' => 'success'
         ];
-        return redirect()->back()->with($notification);
+
+        $id = Product::latest()->first()->id;
+        return redirect()->route('barcode', $id);
+//        return redirect()->back()->with($notification);
     }
 
     public function ManageProduct()

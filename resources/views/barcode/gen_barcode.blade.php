@@ -168,7 +168,7 @@
     </div>
     <br><br>
     <button id="btnPrint" class="hidden-print btn btn-success">طباعة</button>
-    <a href="javascript:history.back()" class="hidden-print btn btn-danger">رجوع</a>
+    <a href="{{url()->previous()}}" class="hidden-print btn btn-danger">رجوع</a>
 </center>
 <script>
     const $btnPrint = document.querySelector("#btnPrint");
