@@ -145,7 +145,7 @@
                                     @foreach ($carts as $item)
                                         <div class="row">
                                             <div class="col-10">{{$item->qty}}*{{$item->name}}</div>
-                                            @php($sum+=$item->subtotal-($item->qty*$item->options->discount))
+                                            @php($sum+=$item->subtotal/*-($item->qty*$item->options->discount)*/)
                                             <div class="col-2">
                                                 <a href="{{route('remove.cart',$item->rowId)}}"
                                                    class="btn btn-sm btn-danger">
@@ -191,8 +191,8 @@
                                         <input type="hidden" id="customer_id" name="customer_id" required>
                                         <input name="payed" id="amount"
                                                class="form-control"
-                                               value="" type="number" step="0.01"
-                                               required placeholder="{{__('Amount')}}" autocomplete="off">
+                                               type="number" step="0.01"
+                                               required placeholder="{{__('Amount')}}" autocomplete="off" value="{{$sum}}">
                                         <br>
                                         <input type="date" name="order_date"
                                                min="{{\Carbon\Carbon::today()->subDays(14)->format('Y-m-d')}}"
