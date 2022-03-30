@@ -145,7 +145,7 @@
                                                     <h5>{{__('Barcode')}} <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" autocomplete="off" name="barcode"
-                                                               class="form-control"
+                                                               class="form-control" style="pointer-events: none;"
                                                                required="" value="{{$product->barcode}}">
                                                         @error('code')
                                                         <span class="text-danger">{{ $message }}</span>
