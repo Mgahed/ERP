@@ -242,6 +242,11 @@
                                         <input type="hidden" id="customer_id" name="customer_id">
                                         <input type="hidden" id="customer_discount" name="customer_discount" value="0">
                                         <input type="hidden" id="sum" name="sum" value="{{$sum}}">
+                                        <br>
+                                        <input type="text" id="customer_number" name="customer_number" class="form-control d-none" required value="null" style="pointer-events: none;">
+                                        <br>
+                                        <input autocomplete="off" type="text" id="customer_name" name="customer_name" class="form-control d-none" required placeholder="{{__('Customer name')}}" value="null">
+                                        <br>
                                         <div class="d-flex">
                                             <div class="text-left">
                                                 <input id="confirm" type="submit"
@@ -294,6 +299,8 @@
                     $('#customer_id').val(data.id);
                     $('.customer-name').html('<span class="text-danger">' + data.name + '</span>');
                     $('.d-none').removeClass('d-none');
+                    $('#customer_number').hide();
+                    $('#customer_name').hide();
                     $('input[name="customer"]').prop('disabled', true).css('cursor', 'not-allowed');
 
                     $('#confirm').click(function () {
@@ -301,7 +308,17 @@
                     });
                 },
                 error: function () {
-                    $('.customer-name').html('<button onclick="openModal()" type="button" class="btn btn-success" data-target="#modal-center"> <i class="mdi mdi-account-plus"></i> </button>');
+                    $('.customer-name').hide();
+                    $('#customer_number').val(customer_number);
+                    $('#customer_name').val('');
+                    $('.d-none').removeClass('d-none');
+                    $('#confirm').click(function () {
+                        $('#confirm').css('pointer-events', 'none');
+                    });
+                    $('#customer_name').keyup(function () {
+                        $('#confirm').css('pointer-events', 'auto');
+                    })
+                    //$('.customer-name').html('<button onclick="openModal()" type="button" class="btn btn-success" data-target="#modal-center"> <i class="mdi mdi-account-plus"></i> </button>');
                     //$('input[name="customer"]').prop('disabled', true).css('cursor', 'not-allowed');
                 }
             });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Jobs\SendMails;
 use App\Mail\LoginMail;
 use App\Mail\OrderMail;
+use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
@@ -96,6 +97,7 @@ class CartController extends Controller
 
     public function makeOrder(Request $request)
     {
+//        return $request;
         if (!count(Cart::content())) {
             $notification = [
                 'message' => __('You took too long to make this order please add products again'),
@@ -117,9 +119,19 @@ class CartController extends Controller
 
         $number = str_pad($id, 9, "0", STR_PAD_LEFT);
 
+        if ($request->customer_id != null) {
+            $customer_id = $request->customer_id;
+        } else {
+            $customer_id = Customer::insertGetId([
+                'name' => $request->customer_name,
+                'mobile' => $request->customer_number,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+        }
         $order_id = Order::insertGetId([
             'user_id' => auth()->id(),
-            'customer_id' => $request->customer_id,
+            'customer_id' => $customer_id,
 
             'customer_discount' => $request->customer_discount,
 
