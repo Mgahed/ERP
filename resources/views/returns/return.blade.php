@@ -31,7 +31,10 @@
                             <span class="text-danger">{{__('Order date')}}:</span>
                             <b>{{date('d/m/Y',strtotime($returns->order_date))}}</b><br>
                             <span class="text-danger">{{__('Cashier')}}:</span> <b>{{$returns->user->name}}</b><br>
-                            <span class="text-danger">{{__('Customer')}}:</span> <b>{{$returns->customer->name}}</b><br>
+                            @if ($returns->customer)
+                                <span class="text-danger">{{__('Customer')}}:</span> <b>{{$returns->customer->name}}</b>
+                                <br>
+                            @endif
                             <span class="text-danger">{{__('Amount')}}:</span> <b>{{$returns->amount}}</b><br>
                         </div>
                         <!-- /.box-header -->

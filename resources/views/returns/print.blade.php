@@ -142,10 +142,12 @@
                     <th style="border: 0;"> رقم المرتجع:</th>
                     <th style="border: 0;"> {{ $return->return_number }} </th>
                 </tr>
-                <tr style="border: 0;">
-                    <th style="border: 0;"> اسم العميل:</th>
-                    <th style="border: 0;"> {{ $return->customer->name }} </th>
-                </tr>
+                @if ($return->customer)
+                    <tr style="border: 0;">
+                        <th style="border: 0;"> اسم العميل:</th>
+                        <th style="border: 0;"> {{ $return->customer->name }} </th>
+                    </tr>
+                @endif
                 <tr style="border: 0;">
                     <th style="border: 0;"> تاريخ المرتجع:</th>
                     <th style="border: 0;"> {{ $return->created_at->format('d/m/Y') }} </th>

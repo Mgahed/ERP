@@ -159,6 +159,7 @@
                                     <div class="row">
                                         <div class="col-9">
                                             <input list="customers" name="customer" id="customer"
+                                                   onkeyup="check_customer()"
                                                    class="form-control"
                                                    @if (Session::has('number')) value="{{Session::get('number')}}"
                                                    @elseif (Session::has('order_page_data'))
@@ -193,11 +194,15 @@
                                                value="" type="number" step="0.01"
                                                required placeholder="{{__('Amount')}}" autocomplete="off">
                                         <br>
-                                        <input type="date" name="order_date" min="{{\Carbon\Carbon::today()->subDays(14)->format('Y-m-d')}}" max="{{\Carbon\Carbon::today()->format('Y-m-d')}}" class="form-control" required>
+                                        <input type="date" name="order_date"
+                                               min="{{\Carbon\Carbon::today()->subDays(14)->format('Y-m-d')}}"
+                                               max="{{\Carbon\Carbon::today()->format('Y-m-d')}}" class="form-control"
+                                               required>
                                         <br>
                                         <div class="d-flex">
                                             <div class="text-left">
-                                                <input type="submit" class="btn btn-rounded btn-primary mb-5 d-none"
+                                                <input type="submit" class="btn btn-rounded btn-primary mb-5"
+                                                       id="confirm"
                                                        value="{{__('Confirm')}}">
                                             </div>
 
@@ -255,7 +260,7 @@
             });
         }
 
-        function get_amount(){
+        function get_amount() {
 
             let amount = $('#amount').val();
             $('#payed').val(amount);
@@ -279,6 +284,15 @@
         function dismiss() {
             $('#modal-center').modal('hide');
             $('#modal-center-product').modal('hide');
+        }
+
+        function check_customer() {
+            console.log($('#customer').val())
+            if ($('#customer').val() !== '') {
+                $('#confirm').addClass('d-none');
+            } else {
+                $('#confirm').removeClass('d-none');
+            }
         }
     </script>
 @endsection

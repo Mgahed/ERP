@@ -139,25 +139,27 @@
         <div style="font-weight: bold;">
             <table style="border: 0;">
                 <tr style="border: 0;">
-                    <th style="border: 0;">Return Invoice: </th>
+                    <th style="border: 0;">Return Invoice:</th>
                     <th style="border: 0;"> {{ $return->return_number }} </th>
                 </tr>
+                @if ($return->customer)
+                    <tr style="border: 0;">
+                        <th style="border: 0;">Customer:</th>
+                        <th style="border: 0;"> {{ $return->customer->name }} </th>
+                    </tr>
+                @endif
                 <tr style="border: 0;">
-                    <th style="border: 0;">Customer: </th>
-                    <th style="border: 0;"> {{ $return->customer->name }} </th>
-                </tr>
-                <tr style="border: 0;">
-                    <th style="border: 0;">Return Date: </th>
+                    <th style="border: 0;">Return Date:</th>
                     <th style="border: 0;"> {{ $return->created_at->format('d/m/Y') }} </th>
                     <td style="border: 0;"></td>
                     <td style="border: 0;"></td>
                     <td style="border: 0;"></td>
                     <td style="border: 0;"></td>
-                    <th style="border: 0;">Order Date: </th>
+                    <th style="border: 0;">Return Date:</th>
                     <th style="border: 0;"> {{ date('d/m/Y',strtotime($return->order_date)) }} </th>
                 </tr>
                 <tr style="border: 0;">
-                    <th style="border: 0;">Cashier: </th>
+                    <th style="border: 0;">Cashier:</th>
                     <th style="border: 0;"> {{ $return->user->name }} </th>
                 </tr>
             </table>

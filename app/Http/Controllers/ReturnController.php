@@ -83,6 +83,7 @@ class ReturnController extends Controller
 
     public function MakeReturns(Request $request)
     {
+//        return $request;
         $carts = Cart::content();
 
         $last_return = Retorn::latest()->first();

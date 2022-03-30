@@ -38,13 +38,16 @@
                                             <td> {{ $item->return_number }}  </td>
                                             <td> {{ $item->amount }}{{__('EGP')}}  </td>
                                             <td> {{$item->user->name}}  </td>
-                                            <td> {{$item->customer->name}}  </td>
-
+                                            @if ($item->customer)
+                                                <td> {{$item->customer->name}}  </td>
+                                            @else
+                                                <td></td>
+                                            @endif
                                             <td width="25%">
                                                 <a href="{{ route('view-return',$item->id) }}"
-                                                    class="btn btn-info" title="Details"><i class="fa fa-eye"></i> </a>
+                                                   class="btn btn-info" title="Details"><i class="fa fa-eye"></i> </a>
                                                 <a href="{{route('delete.return',$item->id)}}" class="btn btn-danger"
-                                                    title="Delete">
+                                                   title="Delete">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </td>
