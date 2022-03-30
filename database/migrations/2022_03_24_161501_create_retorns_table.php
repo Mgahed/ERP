@@ -16,7 +16,7 @@ class CreateRetornsTable extends Migration
         Schema::create('retorns', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('customer_id');
+            $table->integer('customer_id')->nullable();
             $table->double('amount', 8, 2);
             $table->string('return_number');
             $table->date('order_date');
