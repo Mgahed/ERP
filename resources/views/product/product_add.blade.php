@@ -174,8 +174,7 @@
                                                         <input onkeyup="percentages(this)" type="number" min="0"
                                                                step="0.01" name="percentage"
                                                                autocomplete="off"
-                                                               class="form-control"
-                                                               required="" value="">
+                                                               class="form-control" value="">
                                                         <div class="input-group-addon">
                                                             <i class="fa fa-percent"></i>
                                                         </div>
