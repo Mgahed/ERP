@@ -108,7 +108,8 @@
                                                 <div class="form-group">
                                                     <h5>{{__('Selling Price')}} <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="number" step="0.01" autocomplete="off"
+                                                        <input id="selling_price" type="number" step="0.01"
+                                                               autocomplete="off"
                                                                name="sell_price"
                                                                class="form-control"
                                                                required="" value="{{$product->sell_price}}">
@@ -123,8 +124,9 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <h5>{{__('Discount Price')}}</h5>
-                                                    <div class="controls">
-                                                        <input type="number" step="0.01" autocomplete="off"
+                                                    <div id="discount" class="controls" style="display: none;">
+                                                        <input onkeyup="discountPrice(this)" type="number" min="0"
+                                                               step="0.01" autocomplete="off"
                                                                name="discount_price"
                                                                class="form-control"
                                                                value="{{$product->discount_price}}">
@@ -145,7 +147,8 @@
                                                     <h5>{{__('Barcode')}} <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" autocomplete="off" name="barcode"
-                                                               class="form-control" {{--style="pointer-events: none;"--}}
+                                                               class="form-control"
+                                                               {{--style="pointer-events: none;"--}}
                                                                required="" value="{{$product->barcode}}">
                                                         @error('code')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -170,6 +173,24 @@
                                                 </div>
                                             </div> <!-- end col md 4 -->
 
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <h5>{{__('Product discount percentage')}}
+                                                    </h5>
+                                                    <div id="percentage" class="input-group controls"
+                                                         style="display: none;">
+                                                        <input onkeyup="percentages(this)" type="number" min="0"
+                                                               step="0.01" name="percentage"
+                                                               autocomplete="off"
+                                                               class="form-control"
+                                                               required="" value="">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-percent"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> <!-- end col md 4 -->
 
 
                                         </div> <!-- end 3RD row  -->
@@ -199,8 +220,37 @@
         <!-- /.content -->
 
 
-
     </div>
 
+    <script>
+        let intervalID = window.setInterval(() => {
+            if ($('#selling_price').val() > 0) {
+                $('#discount').show();
+                $('#percentage').show();
+            } else {
+                $('#discount').hide();
+                $('#percentage').hide();
+            }
+        }, 700);
 
+        function percentages(elem) {
+            let selling_price = $('#selling_price').val()
+            let percentage = $(elem).val();
+            $('input[name="discount_price"]').val(selling_price - (selling_price * percentage / 100))
+        }
+
+        function discountPrice(elem) {
+            let selling_price = $('#selling_price').val()
+            let discount_price = $(elem).val();
+            if (discount_price) {
+                $('input[name="percentage"]').val(100 - (discount_price / selling_price * 100))
+            }else {
+                $('input[name="percentage"]').val(0)
+            }
+        }
+
+        setTimeout(() => {
+            discountPrice($('input[name="discount_price"]'));
+        }, 900);
+    </script>
 @endsection
