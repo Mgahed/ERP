@@ -33,7 +33,8 @@
         <link rel="stylesheet" href="{{asset('admin-dashboard/css/rtl_skin_color.css')}}">
     @endif
     {{-- toaster --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">--}}
+    <link rel="stylesheet" href="{{asset('somePacks/toaster.css')}}">
     <style>
         #profileImage {
             width: 43px;
@@ -109,6 +110,7 @@
 
 {{-- Excell --}}
 <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+<script src="{{asset('somePacks/xlsx.full.min.js')}}"></script>
 
 <script>
     $(document).ready(function () {
@@ -117,7 +119,8 @@
     });
 </script>
 {{-- toaster --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>--}}
+<script src="{{asset('somePacks/toastr.min.js')}}"></script>
 <script>
     @if (Session::has('message'))
     var type = "{{Session::get('alert-type','info')}}"

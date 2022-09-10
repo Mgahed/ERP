@@ -243,6 +243,9 @@
     <script type="text/javascript">
         function get_customer() {
             var customer_number = $('input[name="customer"]').val();
+            if(customer_number === ''){
+                customer_number = '0123456789';
+            }
             $.ajax({
                 type: 'GET',
                 url: "{{url('/customer/get')}}/" + customer_number,

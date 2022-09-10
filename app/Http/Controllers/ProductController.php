@@ -193,7 +193,7 @@ class ProductController extends Controller
                 'alert-type' => 'success'
             ];
 
-            if (Auth::user()->role != 'admin') {
+            /*if (Auth::user()->role != 'admin') {
                 $user = Auth::user()->name;
                 $message = " لقد قام " . $user . " بحذف المنتج " . $name;
                 $email_data = [
@@ -202,7 +202,7 @@ class ProductController extends Controller
                 ];
 
                 Mail::to('ahmedalaa123V@gmail.com')->send(new DeleteProductMail($email_data));
-            }
+            }*/
 
             return redirect()->back()->with($notification);
         }

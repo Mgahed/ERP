@@ -160,7 +160,7 @@ class CartController extends Controller
         if (Session::has('order_page_data')) {
             Session::forget('order_page_data');
         }
-        if (Auth::user()->role != 'admin') {
+        /*if (Auth::user()->role != 'admin') {
             $user = Auth::user()->name;
             $message = " لقد قام " . $user . " بعمل طلب جديد برقم " . $number;
             $email_data = [
@@ -168,7 +168,7 @@ class CartController extends Controller
                 'msg' => $message
             ];
             $this->dispatch(new SendMails($email_data));
-        }
+        }*/
 
         return redirect()->route('print-order', $order_id);
     }

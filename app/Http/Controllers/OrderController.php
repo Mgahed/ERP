@@ -68,7 +68,7 @@ class OrderController extends Controller
             'alert-type' => 'info'
         ];
 
-        if (Auth::user()->role != 'admin') {
+        /*if (Auth::user()->role != 'admin') {
             $user = Auth::user()->name;
             $message = " لقد قام " . $user . " بحذف عنصر واحد " . $product->name_ar . " من الطلب رقم " . $item->order_id;
             $email_data = [
@@ -77,7 +77,7 @@ class OrderController extends Controller
             ];
 
             Mail::to('ahmedalaa123V@gmail.com')->send(new RemoveItemMail($email_data));
-        }
+        }*/
 
         return redirect()->back()->with($notification);
     }
@@ -99,7 +99,7 @@ class OrderController extends Controller
             'alert-type' => 'info'
         ];
 
-        if (Auth::user()->role != 'admin') {
+        /*if (Auth::user()->role != 'admin') {
             $user = Auth::user()->name;
             $message = " لقد قام " . $user . " بحذف عدد " . $item->qty . " عنصر لمنتج " . $product->name_ar . " من الطلب رقم " . $item->order_id;
             $email_data = [
@@ -108,7 +108,7 @@ class OrderController extends Controller
             ];
 
             Mail::to('ahmedalaa123V@gmail.com')->send(new RemoveItemMail($email_data));
-        }
+        }*/
 
         return redirect()->back()->with($notification);
     }
@@ -128,7 +128,7 @@ class OrderController extends Controller
             'alert-type' => 'info'
         ];
 
-        if (Auth::user()->role != 'admin') {
+        /*if (Auth::user()->role != 'admin') {
             $user = Auth::user()->name;
             $message = " لقد قام " . $user . " بحذف الطلب رقم "  . $order->order_number;
             $email_data = [
@@ -137,7 +137,7 @@ class OrderController extends Controller
             ];
 
             Mail::to('ahmedalaa123V@gmail.com')->send(new RemoveOrderMail($email_data));
-        }
+        }*/
 
         return redirect()->back()->with($notification);
     }
