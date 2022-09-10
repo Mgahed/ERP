@@ -18,10 +18,6 @@ php artisan migrate
 ```bash
 php artisan db:seed
 ```
-```bash
-php artisan passport:install
-``` 
-```I'm using passport for authentication```
 
 ## Credentials:
 
