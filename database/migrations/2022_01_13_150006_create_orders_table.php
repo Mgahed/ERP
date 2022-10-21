@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->string('user_id');
             $table->string('customer_id');
+            $table->string('customer_discount');
             $table->string('amount');
             $table->string('order_number');
             $table->softDeletes();

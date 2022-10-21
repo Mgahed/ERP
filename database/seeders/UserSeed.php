@@ -23,7 +23,7 @@ class UserSeed extends Seeder
             'name' => 'User',
             'email' => 'user@user.com',
             'password' => bcrypt('123456789'),
-            'type' => 'normal',
+            'role' => 'normal',
         ]);
     }
 }

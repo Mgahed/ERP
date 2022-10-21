@@ -56,7 +56,7 @@ class ProductController extends Controller
     public function AddProduct()
     {
         $categories = Category::orderBy('name_en', 'ASC')->get();
-        $barcode = Product::latest()->first()->barcode;
+        $barcode = Product::latest()->first()->barcode??1;
         $substr = substr($barcode, -5);
         if ($substr != 00001) {
             $barcode_gen = '0022700001';
