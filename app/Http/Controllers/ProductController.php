@@ -8,6 +8,7 @@ use App\Mail\RemoveOrderMail;
 use App\Models\Category;
 use App\Models\MultiImg;
 use App\Models\Product;
+use App\Models\SubCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -127,6 +128,7 @@ class ProductController extends Controller
             'sell_price' => $request->sell_price,
             'discount_price' => $request->discount_price,
             'category_id' => $request->category_id,
+            'sub_category_id' => $request->sub_category_id,
         ]);
 
         $notification = [
@@ -141,14 +143,15 @@ class ProductController extends Controller
 
     public function ManageProduct()
     {
-        $products = Product::latest()->get();
+        $products = Product::with('category')->with('subCategory')->latest()->get();
         return view('product.product_view', compact('products'));
     }
 
     public function EditProduct($id)
     {
         $categories = Category::orderBy('name_en', 'asc')->get();
-        $product = Product::with('category')->findOrFail($id);
+        $sub_categories = SubCategory::orderBy('name_en', 'asc')->get();
+        $product = Product::with('category')->with('subCategory')->findOrFail($id);
 
         return view('product.product_edit', compact('product', 'categories'));
     }
@@ -172,6 +175,7 @@ class ProductController extends Controller
             'sell_price' => $request->sell_price,
             'discount_price' => $request->discount_price,
             'category_id' => $request->category_id,
+            'sub_category_id' => $request->sub_category_id,
         ]);
 
         $notification = [

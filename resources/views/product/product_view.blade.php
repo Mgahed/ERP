@@ -32,6 +32,8 @@
                                         <th>{{__('Selling price')}}</th>
                                         <th>{{__('Quantity')}}</th>
                                         <th>{{__('Discount')}}</th>
+                                        <th>{{__('Category')}}</th>
+                                        <th>{{__('Subcategory')}}</th>
                                         <th>{{__('Action')}}</th>
 
                                     </tr>
@@ -59,6 +61,9 @@
 
 
                                             </td>
+
+                                            <td>{{ $item->category->name_en }} - {{$item->category->name_ar}}</td>
+                                            <td>{{ $item->subCategory->name_en ?? '' }} - {{$item->subCategory->name_ar ?? ''}}</td>
 
 
                                             <td width="30%">

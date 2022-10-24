@@ -67,6 +67,7 @@ Route::group(['middleware' => ['expiry']], function () {
                 Route::get('/edit/{id}', [SubCategoryController::class, 'SubCategoryEdit'])->name('sub.category.edit');
                 Route::post('/update/{id}', [SubCategoryController::class, 'SubCategoryUpdate'])->name('sub.category.update');
                 Route::get('/delete/{id}', [SubCategoryController::class, 'SubCategoryDelete'])->name('sub.category.delete');
+                Route::post('/get', [SubCategoryController::class, 'GetSubCategory'])->name('getSubCategories');
             });
 
             /*----- Product all Routes -----*/

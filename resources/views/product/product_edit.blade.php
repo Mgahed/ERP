@@ -27,12 +27,12 @@
 
                                         <div class="row"> <!-- start 1st row  -->
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     <h5>{{__('Select Category')}} <span class="text-danger">*</span>
                                                     </h5>
                                                     <div class="controls">
-                                                        <select name="category_id" class="form-control" required="">
+                                                        <select id="categoryId" name="category_id" class="form-control" required="">
                                                             <option value="{{$product->category->id}}"
                                                                     selected="">{{$product->category->name_en}}
                                                                 - {{$product->category->name_ar}}
@@ -52,8 +52,26 @@
                                                 </div>
                                             </div> <!-- end col md 4 -->
 
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <h5>{{__('Select Subcategory')}} <span class="text-danger">*</span>
+                                                    </h5>
+                                                    <div class="controls">
+                                                        <select id="sub_category_id" name="sub_category_id" class="form-control" required="">
+                                                            <option value="{{$product->subCategory->id ?? null}}"
+                                                                    selected="">{{$product->subCategory->name_en ?? ''}}
+                                                                - {{$product->subCategory->name_ar ?? ''}}
+                                                            </option>
+                                                        </select>
+                                                        @error('sub_category_id')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div> <!-- end col md 4 -->
 
-                                            <div class="col-md-4">
+
+                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     <h5>{{__('Name in English')}} <span class="text-danger">*</span>
                                                     </h5>
@@ -69,7 +87,7 @@
                                             </div> <!-- end col md 4 -->
 
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     <h5>{{__('Name in Arabic')}} <span class="text-danger">*</span></h5>
                                                     <div class="controls">
@@ -221,6 +239,7 @@
 
     </div>
 
+    <script src="{{asset('js/jquery.js')}}"></script>
     <script>
         let intervalID = window.setInterval(() => {
             if ($('#selling_price').val() > 0) {
@@ -251,5 +270,21 @@
         setTimeout(() => {
             discountPrice($('input[name="discount_price"]'));
         }, 900);
+
+        // make ajax request to get sub categories
+        $('#categoryId').on('change', function () {
+            let category_id = $(this).val();
+            $.ajax({
+                url: "{{route('getSubCategories')}}",
+                type: "POST",
+                data: {
+                    _token: "{{csrf_token()}}",
+                    category_id: category_id
+                },
+                success: function (data) {
+                    $('#sub_category_id').html(data);
+                }
+            })
+        });
     </script>
 @endsection

@@ -32,7 +32,7 @@ class SubCategoryController extends Controller
     {
         $categories = Category::latest()->get();
         $subcategories = SubCategory::with('category')->latest()->get();
-        return view('sub_category.category_view', compact('subcategories','categories'));
+        return view('sub_category.category_view', compact('subcategories', 'categories'));
     }
 
     public function SubCategoryStore(Request $request)
@@ -66,7 +66,7 @@ class SubCategoryController extends Controller
     {
         $categories = Category::latest()->get();
         $subcategory = SubCategory::findOrFail($id);
-        return view('sub_category.category_edit', compact('subcategory','categories'));
+        return view('sub_category.category_edit', compact('subcategory', 'categories'));
     }
 
     public function SubCategoryUpdate(Request $request)
@@ -94,5 +94,16 @@ class SubCategoryController extends Controller
             'alert-type' => 'error'
         );
         return redirect()->back()->with($notification);
+    }
+
+    public function GetSubCategory(Request $request)
+    {
+        $category_id = $request->category_id;
+        $subcategories = SubCategory::where('category_id', $category_id)->get();
+        $data = '';
+        foreach ($subcategories as $subcategory) {
+            $data .= '<option value="' . $subcategory->id . '">' . $subcategory->name_en . ' - ' . $subcategory->name_ar . '</option>';
+        }
+        return $data;
     }
 }
