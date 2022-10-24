@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReturnController;
+use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +58,15 @@ Route::group(['middleware' => ['expiry']], function () {
                 Route::get('/edit/{id}', [CategoryController::class, 'CategoryEdit'])->name('category.edit');
                 Route::post('/update/{id}', [CategoryController::class, 'CategoryUpdate'])->name('category.update');
                 Route::get('/delete/{id}', [CategoryController::class, 'CategoryDelete'])->name('category.delete');
+            });
+
+            /*----- Sub Category all Routes -----*/
+            Route::prefix('subcategory')->group(function () {
+                Route::get('/view', [SubCategoryController::class, 'SubCategoryView'])->name('all.sub.category');
+                Route::post('/store', [SubCategoryController::class, 'SubCategoryStore'])->name('sub.category.store');
+                Route::get('/edit/{id}', [SubCategoryController::class, 'SubCategoryEdit'])->name('sub.category.edit');
+                Route::post('/update/{id}', [SubCategoryController::class, 'SubCategoryUpdate'])->name('sub.category.update');
+                Route::get('/delete/{id}', [SubCategoryController::class, 'SubCategoryDelete'])->name('sub.category.delete');
             });
 
             /*----- Product all Routes -----*/

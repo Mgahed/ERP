@@ -227,7 +227,7 @@
             We enjoyed your visit!
             <br><br>
             Contact us via:
-            <br>Number: 01063001503</p>
+            <br>Number: 01015299912</p>
     </div>
     <button id="btnPrint" class="hidden-print btn btn-success">Print</button>
     <a href="javascript:history.back()" class="hidden-print btn btn-danger">Back</a>

@@ -264,7 +264,7 @@
             سعدنا بزيارتكم!
             <br><br>
             تواصل معنا عبر:
-            <br>رقمنا: 01063001503</p>--}}
+            <br>رقمنا: 01015299912</p>--}}
     </div>
     <button id="btnPrint" class="hidden-print btn btn-success">طباعة</button>
     <a href="javascript:history.back()" class="hidden-print btn btn-danger">رجوع</a>

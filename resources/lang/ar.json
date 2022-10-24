@@ -1044,5 +1044,14 @@
     "Return operation": "عملية مرتجعة",
     "Return Details": "تفاصيل المرتجع",
     "Order date": "تاريخ الطلب",
-    "You took too long to make this order please add products again": "لقد استغرقت وقتًا طويلاً لإجراء هذا الطلب ، يُرجى إضافة المنتجات مرة أخرى"
+    "You took too long to make this order please add products again": "لقد استغرقت وقتًا طويلاً لإجراء هذا الطلب ، يُرجى إضافة المنتجات مرة أخرى",
+    "All subcategories": "جميع الفئات الفرعية",
+    "Subcategories": "الفئات الفرعية",
+    "Subcategory": "الفئة الفرعية",
+    "Subcategory List": "قائمة الفئات الفرعية",
+    "Subcategory Inserted Successfully": "تم إدراج الفئة الفرعية بنجاح",
+    "Subcategory Updated Successfully": "تم تحديث الفئة الفرعية بنجاح",
+    "Edit Subcategory": "تحرير الفئة الفرعية",
+    "Subcategory Deleted Successfully": "تم حذف الفئة الفرعية بنجاح",
+    "Add Subcategory": "أضف الفئة الفرعية"
 }

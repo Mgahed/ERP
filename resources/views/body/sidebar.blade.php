@@ -31,11 +31,11 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{Request::is(app()->getLocale().'/returns/make') ? 'active' : ''}}"><a
-                            href="{{route('make-returns')}}"><i class="ti-more"></i>{{__('Return')}}</a>
+                                href="{{route('make-returns')}}"><i class="ti-more"></i>{{__('Return')}}</a>
                     </li>
                     @if (auth()->user()->role === 'admin')
                         <li class="{{Request::is(app()->getLocale().'/returns/all') ? 'active' : ''}}"><a
-                                href="{{route('all-returns')}}"><i class="ti-more"></i>{{__('All returns')}}</a>
+                                    href="{{route('all-returns')}}"><i class="ti-more"></i>{{__('All returns')}}</a>
                         </li>
                     @endif
                 </ul>
@@ -49,11 +49,12 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{Request::is(app()->getLocale().'/order/all') ? 'active' : ''}}"><a
-                            href="{{route('all-order')}}"><i class="ti-more"></i>{{__('All orders')}}</a>
+                                href="{{route('all-order')}}"><i class="ti-more"></i>{{__('All orders')}}</a>
                     </li>
                     @if (auth()->user()->role === 'admin')
                         <li class="{{Request::is(app()->getLocale().'/order/deleted/all') ? 'active' : ''}}"><a
-                                href="{{route('deleted.orders')}}"><i class="ti-more"></i>{{__('Deleted orders')}}</a>
+                                    href="{{route('deleted.orders')}}"><i class="ti-more"></i>{{__('Deleted orders')}}
+                            </a>
                         </li>
                     @endif
                 </ul>
@@ -67,7 +68,10 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{Request::is(app()->getLocale().'/category/view') ? 'active' : ''}}"><a
-                            href="{{route('all.category')}}"><i class="ti-more"></i>{{__('All categories')}}</a>
+                                href="{{route('all.category')}}"><i class="ti-more"></i>{{__('All categories')}}</a>
+                    </li>
+                    <li class="{{Request::is(app()->getLocale().'/subcategory/view') ? 'active' : ''}}"><a
+                                href="{{route('all.sub.category')}}"><i class="ti-more"></i>{{__('All subcategories')}}</a>
                     </li>
                 </ul>
             </li>
@@ -80,54 +84,57 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{Request::is(app()->getLocale().'/product/add') ? 'active' : ''}}"><a
-                            href="{{route('add-product')}}"><i class="ti-more"></i>{{__('Add products')}}</a></li>
+                                href="{{route('add-product')}}"><i class="ti-more"></i>{{__('Add products')}}</a></li>
                     <li class="{{Request::is(app()->getLocale().'/product/edit/*') ? 'active' : ''}}{{Request::is(app()->getLocale().'/product/manage') ? 'active' : ''}}">
                         <a
-                            href="{{route('manage-product')}}"><i class="ti-more"></i>{{__('Manage products')}}</a>
+                                href="{{route('manage-product')}}"><i class="ti-more"></i>{{__('Manage products')}}</a>
                     </li>
                     @if (auth()->user()->role === 'admin')
                         <li class="{{Request::is(app()->getLocale().'/product/deleted') ? 'active' : ''}}">
                             <a
-                                href="{{route('deleted.products')}}"><i class="ti-more"></i>{{__('Deleted products')}}
+                                    href="{{route('deleted.products')}}"><i
+                                        class="ti-more"></i>{{__('Deleted products')}}
                             </a>
                         </li>
                     @endif
                 </ul>
             </li>
-            <li class="treeview {{Request::is(app()->getLocale().'/alluser/*') ? 'active' : ''}}">
-                <a href="#">
-                    <i class="fa fa-users"></i> <span>{{__('Users')}}</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="{{Request::is(app()->getLocale().'/alluser/*') ? 'active' : ''}}">
-                        <a
-                            href="{{route('all-users')}}"><i class="ti-more"></i>{{__('All users')}}</a>
-                    </li>
-                    @if (auth()->user()->role === 'admin')
-                        <li class="{{Request::is(app()->getLocale().'/register') ? 'active' : ''}}">
-                            <a
-                                href="{{route('register')}}"><i class="ti-more"></i>{{__('Register new user')}}</a>
-                        </li>
-                    @endif
-                </ul>
-            </li>
-            <li class="treeview {{Request::is(app()->getLocale().'/customer/*') ? 'active' : ''}}">
-                <a href="#">
-                    <i class="mdi mdi-account-multiple"></i> <span>{{__('Customers')}}</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="{{Request::is(app()->getLocale().'/customer/view') ? 'active' : ''}}"><a
-                            href="{{route('all.customers')}}"><i class="ti-more"></i>{{__('All customers')}}</a>
-                    </li>
-                </ul>
-            </li>
             @if (auth()->user()->role === 'admin')
+                <li class="treeview {{Request::is(app()->getLocale().'/alluser/*') ? 'active' : ''}}">
+                    <a href="#">
+                        <i class="fa fa-users"></i> <span>{{__('Users')}}</span>
+                        <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="{{Request::is(app()->getLocale().'/alluser/*') ? 'active' : ''}}">
+                            <a
+                                    href="{{route('all-users')}}"><i class="ti-more"></i>{{__('All users')}}</a>
+                        </li>
+                        @if (auth()->user()->role === 'admin')
+                            <li class="{{Request::is(app()->getLocale().'/register') ? 'active' : ''}}">
+                                <a
+                                        href="{{route('register')}}"><i class="ti-more"></i>{{__('Register new user')}}
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
+                </li>
+                <li class="treeview {{Request::is(app()->getLocale().'/customer/*') ? 'active' : ''}}">
+                    <a href="#">
+                        <i class="mdi mdi-account-multiple"></i> <span>{{__('Customers')}}</span>
+                        <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="{{Request::is(app()->getLocale().'/customer/view') ? 'active' : ''}}"><a
+                                    href="{{route('all.customers')}}"><i class="ti-more"></i>{{__('All customers')}}</a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="treeview {{Request::is(app()->getLocale().'/reports/*') ? 'active' : ''}}">
                     <a href="#">
                         <i class="mdi mdi-note-text"></i> <span>{{__('Reports')}}</span>
@@ -137,7 +144,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li class="{{Request::is(app()->getLocale().'/reports/view') ? 'active' : ''}}"><a
-                                href="{{route('all-reports')}}"><i class="ti-more"></i>{{__('All reports')}}</a>
+                                    href="{{route('all-reports')}}"><i class="ti-more"></i>{{__('All reports')}}</a>
                         </li>
                     </ul>
                 </li>
