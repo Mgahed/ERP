@@ -136,3 +136,5 @@ Route::group(['middleware' => ['expiry']], function () {
 Route::get('Link-Expired', function () {
     return view('errors.419');
 })->name('error_419');
+
+\PWA::routes();

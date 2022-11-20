@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9a58f60c61bb8050d0dfe75e3e4aafe7",
+    "content-hash": "c466293e4c434ec7638b778c20a48a83",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -192,6 +192,84 @@
                 "source": "https://github.com/bumbummen99/LaravelShoppingcart/tree/4.0.0"
             },
             "time": "2021-01-18T23:55:30+00:00"
+        },
+        {
+            "name": "codexshaper/laravel-pwa",
+            "version": "v1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Codexshaper/laravel-pwa.git",
+                "reference": "1931834ac41db320c906cbd6e7184781229c1486"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Codexshaper/laravel-pwa/zipball/1931834ac41db320c906cbd6e7184781229c1486",
+                "reference": "1931834ac41db320c906cbd6e7184781229c1486",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.6|^6.0|^7.0|^8.0",
+                "php": "^7.0|^7.1|^7.2|^7.3|^7.4|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^4.0",
+                "phpunit/phpunit": "^7.0|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "CodexShaper\\PWA\\PwaServiceProvider"
+                    ],
+                    "aliases": {
+                        "PWA": "CodexShaper\\PWA\\Facades\\PWA"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "CodexShaper\\PWA\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Md Abu Ahsan Basir",
+                    "email": "maab.career@gmail.com"
+                }
+            ],
+            "description": "Laravel Progressive Web App",
+            "homepage": "https://github.com/Codexshaper/laravel-pwa",
+            "keywords": [
+                "android",
+                "app",
+                "chrome",
+                "firefox",
+                "firefox-pwa",
+                "google-pwa",
+                "ios",
+                "ios-pwa",
+                "laravel",
+                "laravel-pwa",
+                "multi-tenancy",
+                "multitenancy",
+                "multitenant",
+                "progressive",
+                "progressive-web-app",
+                "pwa",
+                "pwa-laravel",
+                "safari",
+                "safari-pwa",
+                "web"
+            ],
+            "support": {
+                "issues": "https://github.com/Codexshaper/laravel-pwa/issues",
+                "source": "https://github.com/Codexshaper/laravel-pwa"
+            },
+            "time": "2021-12-27T14:47:49+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -8184,5 +8262,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
