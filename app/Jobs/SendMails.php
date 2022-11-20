@@ -4,7 +4,6 @@ namespace App\Jobs;
 
 use App\Mail\OrderMail;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -34,6 +33,6 @@ class SendMails implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to('ahmedalaa123V@gmail.com')->send(new OrderMail($this->data));
+        Mail::to('mgahed@mrtechnawy.com')->send(new OrderMail($this->data));
     }
 }
