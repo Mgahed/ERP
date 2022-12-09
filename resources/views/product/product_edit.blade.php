@@ -1,7 +1,6 @@
 @extends('admin_master')
 @section('admin')
 
-
     <div class="container-full">
         <!-- Content Header (Page header) -->
 
@@ -32,7 +31,8 @@
                                                     <h5>{{__('Select Category')}} <span class="text-danger">*</span>
                                                     </h5>
                                                     <div class="controls">
-                                                        <select id="categoryId" name="category_id" class="form-control" required="">
+                                                        <select id="categoryId" name="category_id" class="form-control"
+                                                                required="">
                                                             <option value="{{$product->category->id}}"
                                                                     selected="">{{$product->category->name_en}}
                                                                 - {{$product->category->name_ar}}
@@ -57,7 +57,8 @@
                                                     <h5>{{__('Select Subcategory')}} <span class="text-danger">*</span>
                                                     </h5>
                                                     <div class="controls">
-                                                        <select id="sub_category_id" name="sub_category_id" class="form-control" required="">
+                                                        <select id="sub_category_id" name="sub_category_id"
+                                                                class="form-control" required="">
                                                             <option value="{{$product->subCategory->id ?? null}}"
                                                                     selected="">{{$product->subCategory->name_en ?? ''}}
                                                                 - {{$product->subCategory->name_ar ?? ''}}
@@ -212,6 +213,71 @@
 
                                         </div> <!-- end 3RD row  -->
 
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <h5>{{__('Image')}}
+                                                    </h5>
+                                                    <div id="percentage" class="input-group controls">
+                                                        <input type="file" accept="image/png, image/jpeg" name="image"
+                                                               autocomplete="off" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div> <!-- end col md 4 -->
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <h5>{{__('Tax')}}
+                                                    </h5>
+                                                    <div id="percentage" class="input-group controls">
+                                                        <input type="number" min="0"
+                                                               step="0.01" name="tax"
+                                                               autocomplete="off"
+                                                               class="form-control" value="{{$product->tax}}">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-percent"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> <!-- end col md 4 -->
+                                        </div> <!-- end col md 4 -->
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <h5>{{__('Description')}} {{__('In English')}} <span class="text-danger">*</span>
+                                                    </h5>
+                                                    <div class="controls">
+                                                        <textarea type="text" autocomplete="off" name="description"
+                                                                  class="form-control"
+                                                                  required>{{$product->description_en}}</textarea>
+                                                        @error('description')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                    <br>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <h5>{{__('Description_ar')}} {{__('In Arabic')}} <span class="text-danger">*</span>
+                                                    </h5>
+                                                    <div class="controls">
+                                                        <textarea type="text" autocomplete="off" name="description_ar"
+                                                                  class="form-control"
+                                                                  required>{{$product->description_ar}}</textarea>
+                                                        @error('description_ar')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                    <br>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
 
                                         <br>
 
@@ -262,7 +328,7 @@
             let discount_price = $(elem).val();
             if (discount_price) {
                 $('input[name="percentage"]').val(100 - (discount_price / selling_price * 100))
-            }else {
+            } else {
                 $('input[name="percentage"]').val(0)
             }
         }

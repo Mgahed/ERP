@@ -26,12 +26,14 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
+                                        <th class="text-center">{{__('Image')}}</th>
                                         <th>{{__('Barcode')}}</th>
                                         <th>{{__('Product name')}}</th>
                                         <th>{{__('Buying price')}}</th>
                                         <th>{{__('Selling price')}}</th>
                                         <th>{{__('Quantity')}}</th>
                                         <th>{{__('Discount')}}</th>
+                                        <th>{{__('Tax')}}</th>
                                         <th>{{__('Category')}}</th>
                                         <th>{{__('Subcategory')}}</th>
                                         <th>{{__('Action')}}</th>
@@ -41,6 +43,9 @@
                                     <tbody>
                                     @foreach($products as $item)
                                         <tr>
+                                            <td class="text-center">
+                                                <img src="{{ asset($item->image) }}" alt="{{ $item->name_en }}"
+                                                     style="width: 50px; height: 50px;">
                                             <td>{{ $item->barcode }}</td>
                                             <td>{{ $item->name_en }} - {{ $item->name_ar }}</td>
                                             <td>{{ $item->buy_price }} {{__('EGP')}}</td>
@@ -60,6 +65,13 @@
                                                 @endif
 
 
+                                            </td>
+                                            <td>
+                                                @if($item->tax == NULL)
+                                                    <span class="badge badge-pill badge-danger">{{__('No Tax')}}</span>
+                                                @else
+                                                    <span class="badge badge-pill badge-danger">{{ $item->tax }} %</span>
+                                                @endif
                                             </td>
 
                                             <td>{{ $item->category->name_en }} - {{$item->category->name_ar}}</td>

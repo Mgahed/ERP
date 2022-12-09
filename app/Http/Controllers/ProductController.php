@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\ImageTrait;
 use App\Mail\DeleteProductMail;
 use App\Mail\RemoveOrderMail;
 use App\Models\Category;
@@ -18,6 +19,8 @@ use Image;
 
 class ProductController extends Controller
 {
+    use ImageTrait;
+
     protected function getRules()
     {
         return [
@@ -29,6 +32,7 @@ class ProductController extends Controller
             'sell_price' => 'required|numeric|min:0',
             /*'discount_price' => 'numeric|min:0',*/
             'category_id' => 'required',
+            'description' => 'required',
         ];
     }
 
@@ -57,7 +61,7 @@ class ProductController extends Controller
     public function AddProduct()
     {
         $categories = Category::orderBy('name_en', 'ASC')->get();
-        $barcode = Product::latest()->first()->barcode??1;
+        $barcode = Product::latest()->first()->barcode ?? 1;
         $substr = substr($barcode, -5);
         if ($substr != 00001) {
             $barcode_gen = '0022700001';
@@ -129,6 +133,11 @@ class ProductController extends Controller
             'discount_price' => $request->discount_price,
             'category_id' => $request->category_id,
             'sub_category_id' => $request->sub_category_id,
+            'description_en' => $request->description,
+            'description_ar' => $request->description,
+            'tax' => $request->tax ?? null,
+            'image' => $request->file('image') ? $this->img($request->file('image'), 'images/products/') : null,
+
         ]);
 
         $notification = [
@@ -176,6 +185,10 @@ class ProductController extends Controller
             'discount_price' => $request->discount_price,
             'category_id' => $request->category_id,
             'sub_category_id' => $request->sub_category_id,
+            'description_en' => $request->description,
+            'description_ar' => $request->description_ar,
+            'tax' => $request->tax ?? null,
+            'image' => $request->file('image') ? $this->img($request->file('image'), 'images/products/', $product->image) : $product->image,
         ]);
 
         $notification = [
@@ -190,6 +203,7 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $name = $product->name_ar;
+//        $this->deleteImg($product->image);
         $delete = $product->delete();
         if ($delete) {
             $notification = [

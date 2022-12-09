@@ -37,7 +37,7 @@
                                                             </option>
                                                             @foreach($categories as $category)
                                                                 <option
-                                                                        value="{{ $category->id }}">{{ $category->name_en }}
+                                                                    value="{{ $category->id }}">{{ $category->name_en }}
                                                                     - {{$category->name_ar}}</option>
                                                             @endforeach
                                                         </select>
@@ -204,6 +204,54 @@
 
 
                                         </div> <!-- end 3RD row  -->
+
+                                        <div class="row">
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <h5>{{__('Image')}}
+                                                    </h5>
+                                                    <div id="percentage" class="input-group controls">
+                                                        <input type="file" accept="image/png, image/jpeg" name="image"
+                                                               autocomplete="off" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div> <!-- end col md 4 -->
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <h5>{{__('Tax')}}
+                                                    </h5>
+                                                    <div id="percentage" class="input-group controls">
+                                                        <input type="number" min="0"
+                                                               step="0.01" name="tax"
+                                                               autocomplete="off"
+                                                               class="form-control" value="">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-percent"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> <!-- end col md 4 -->
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <h5>{{__('Description')}} <span class="text-danger">*</span>
+                                                    </h5>
+                                                    <div class="controls">
+                                                        <textarea type="text" autocomplete="off" name="description"
+                                                                  class="form-control"
+                                                                  required></textarea>
+                                                        @error('description')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                    <br>
+                                                </div>
+                                            </div> <!-- end col md 4 -->
+
+
+                                        </div>
 
 
                                         <br>
