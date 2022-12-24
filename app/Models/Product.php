@@ -23,6 +23,11 @@ class Product extends Model
         return $this->belongsTo(SubCategory::class, 'sub_category_id', 'id');
     }
 
+    public function subSubCategory()
+    {
+        return $this->belongsTo(SubSubCategory::class, 'sub_sub_category_id', 'id');
+    }
+
     public function orderItem()
     {
         return $this->hasMany(OrderItem::class, 'product_id', 'id');

@@ -73,6 +73,9 @@
                     <li class="{{Request::is(app()->getLocale().'/subcategory/view') ? 'active' : ''}}"><a
                                 href="{{route('all.sub.category')}}"><i class="ti-more"></i>{{__('All subcategories')}}</a>
                     </li>
+                    <li class="{{Request::is(app()->getLocale().'/sub-sub-category/view') ? 'active' : ''}}"><a
+                            href="{{route('all.sub.sub.category')}}"><i class="ti-more"></i>{{__('All sub subcategories')}}</a>
+                    </li>
                 </ul>
             </li>
             <li class="treeview {{Request::is(app()->getLocale().'/product/*') ? 'active' : ''}}">

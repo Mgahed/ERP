@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReturnController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\SubSubCategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -68,6 +69,16 @@ Route::group(['middleware' => ['expiry']], function () {
                 Route::post('/update/{id}', [SubCategoryController::class, 'SubCategoryUpdate'])->name('sub.category.update');
                 Route::get('/delete/{id}', [SubCategoryController::class, 'SubCategoryDelete'])->name('sub.category.delete');
                 Route::post('/get', [SubCategoryController::class, 'GetSubCategory'])->name('getSubCategories');
+            });
+
+            /*----- Sub Sub Category all Routes -----*/
+            Route::prefix('sub-sub-category')->group(function () {
+                Route::get('/view', [SubSubCategoryController::class, 'SubSubCategoryView'])->name('all.sub.sub.category');
+                Route::post('/store', [SubSubCategoryController::class, 'SubSubCategoryStore'])->name('sub.sub.category.store');
+                Route::get('/edit/{id}', [SubSubCategoryController::class, 'SubSubCategoryEdit'])->name('sub.sub.category.edit');
+                Route::post('/update/{id}', [SubSubCategoryController::class, 'SubSubCategoryUpdate'])->name('sub.sub.category.update');
+                Route::get('/delete/{id}', [SubSubCategoryController::class, 'SubSubCategoryDelete'])->name('sub.sub.category.delete');
+                Route::post('/get', [SubSubCategoryController::class, 'GetSubSubCategory'])->name('getSubSubCategories');
             });
 
             /*----- Product all Routes -----*/

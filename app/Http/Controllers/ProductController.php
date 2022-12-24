@@ -133,6 +133,7 @@ class ProductController extends Controller
             'discount_price' => $request->discount_price,
             'category_id' => $request->category_id,
             'sub_category_id' => $request->sub_category_id,
+            'sub_sub_category_id' => $request->sub_sub_category_id,
             'description_en' => $request->description,
             'description_ar' => $request->description,
             'tax' => $request->tax ?? null,
@@ -152,7 +153,7 @@ class ProductController extends Controller
 
     public function ManageProduct()
     {
-        $products = Product::with('category')->with('subCategory')->latest()->get();
+        $products = Product::with('category')->with('subCategory')->with('subSubCategory')->latest()->get();
         return view('product.product_view', compact('products'));
     }
 
@@ -162,7 +163,7 @@ class ProductController extends Controller
         $sub_categories = SubCategory::orderBy('name_en', 'asc')->get();
         $product = Product::with('category')->with('subCategory')->findOrFail($id);
 
-        return view('product.product_edit', compact('product', 'categories'));
+        return view('product.product_edit', compact('product', 'categories', 'sub_categories'));
     }
 
     public function ProductDataUpdate(Request $request)

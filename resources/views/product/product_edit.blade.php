@@ -26,7 +26,7 @@
 
                                         <div class="row"> <!-- start 1st row  -->
 
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <h5>{{__('Select Category')}} <span class="text-danger">*</span>
                                                     </h5>
@@ -52,7 +52,7 @@
                                                 </div>
                                             </div> <!-- end col md 4 -->
 
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <h5>{{__('Select Subcategory')}} <span class="text-danger">*</span>
                                                     </h5>
@@ -71,8 +71,31 @@
                                                 </div>
                                             </div> <!-- end col md 4 -->
 
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <h5>{{__('Select Sub Subcategory')}} <span class="text-danger">*</span>
+                                                    </h5>
+                                                    <div class="controls">
+                                                        <select name="sub_sub_category_id" id="sub_sub_category_id"
+                                                                class="form-control" required="">
+                                                            <option value="{{$product->subSubCategory->id ?? null}}"
+                                                                    selected="">{{$product->subSubCategory->name_en ?? ''}}
+                                                                - {{$product->subSubCategory->name_ar ?? ''}}
+                                                            </option>
+                                                        </select>
+                                                        @error('sub_sub_category_id')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div> <!-- end col md 4 -->
 
-                                            <div class="col-md-3">
+
+                                        </div> <!-- end 1st row  -->
+
+
+                                        <div class="row">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <h5>{{__('Name in English')}} <span class="text-danger">*</span>
                                                     </h5>
@@ -88,7 +111,7 @@
                                             </div> <!-- end col md 4 -->
 
 
-                                            <div class="col-md-3">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <h5>{{__('Name in Arabic')}} <span class="text-danger">*</span></h5>
                                                     <div class="controls">
@@ -101,9 +124,7 @@
                                                     </div>
                                                 </div>
                                             </div> <!-- end col md 4 -->
-
-
-                                        </div> <!-- end 1st row  -->
+                                        </div>
 
 
                                         <div class="row"> <!-- start 2nd row  -->
@@ -349,6 +370,23 @@
                 },
                 success: function (data) {
                     $('#sub_category_id').html(data);
+                }
+            })
+        });
+
+        // make ajax request to get sub sub categories
+        $('#sub_category_id').on('change', function () {
+            let sub_category_id = $(this).val();
+            $.ajax({
+                url: "{{route('getSubSubCategories')}}",
+                type: "POST",
+                data: {
+                    _token: "{{csrf_token()}}",
+                    sub_category_id: sub_category_id
+                },
+                success: function (data) {
+                    console.log(data)
+                    $('#sub_sub_category_id').html(data);
                 }
             })
         });

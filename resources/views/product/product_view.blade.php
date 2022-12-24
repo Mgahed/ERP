@@ -36,6 +36,7 @@
                                         <th>{{__('Tax')}}</th>
                                         <th>{{__('Category')}}</th>
                                         <th>{{__('Subcategory')}}</th>
+                                        <th>{{__('Sub Subcategory')}}</th>
                                         <th>{{__('Action')}}</th>
 
                                     </tr>
@@ -76,6 +77,7 @@
 
                                             <td>{{ $item->category->name_en }} - {{$item->category->name_ar}}</td>
                                             <td>{{ $item->subCategory->name_en ?? '' }} - {{$item->subCategory->name_ar ?? ''}}</td>
+                                            <td>{{ $item->subSubCategory->name_en ?? '' }} - {{$item->subSubCategory->name_ar ?? ''}}</td>
 
 
                                             <td width="30%">
