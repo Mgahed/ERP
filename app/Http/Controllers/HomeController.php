@@ -56,4 +56,43 @@ class HomeController extends Controller
         ];
         return redirect()->back()->with($notification);
     }
+
+    public function SetViewer($id)
+    {
+        User::findOrFail($id)->update([
+            'role' => 'viewer'
+        ]);
+        $notification = [
+            'message' => __('User role changed to viewer'),
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
+    }
+
+    public function SetProduct($id)
+    {
+        User::findOrFail($id)->update([
+            'role' => 'product'
+        ]);
+        $notification = [
+            'message' => __('User role changed to product'),
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
+    }
+
+    public function DeleteUser($id)
+    {
+        // random password with letters and numbers
+        $password = \Str::random(8) . rand(1, 100);
+        User::findOrFail($id)->update([
+            'role' => 'deleted',
+            'password' => bcrypt($password)
+        ]);
+        $notification = [
+            'message' => __('User deleted'),
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
+    }
 }

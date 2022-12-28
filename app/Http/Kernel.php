@@ -71,6 +71,7 @@ class Kernel extends HttpKernel
         'localeCookieRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
         'localeViewPath' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
         /*----- my middleware -----*/
-        'expiry' => Expiry::class
+        'expiry' => Expiry::class,
+        'UserRole' => \App\Http\Middleware\UserRole::class,
     ];
 }

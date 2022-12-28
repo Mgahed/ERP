@@ -84,8 +84,6 @@
 @endif
 <script src="{{asset('assets/icons/feather-icons/feather.min.js')}}"></script>
 <script src="{{asset('assets/vendor_components/easypiechart/dist/jquery.easypiechart.js')}}"></script>
-<script src="{{asset('assets/vendor_components/apexcharts-bundle/irregular-data-series.js')}}"></script>
-<script src="{{asset('assets/vendor_components/apexcharts-bundle/dist/apexcharts.js')}}"></script>
 <script src="{{asset('assets/vendor_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js')}}"></script>
 
 {{-- data table --}}
@@ -95,7 +93,7 @@
 
 <!-- Sunny Admin App -->
 <script src="{{asset('admin-dashboard/js/template.js')}}"></script>
-<script src="{{asset('admin-dashboard/js/pages/dashboard.js')}}"></script>
+{{--<script src="{{asset('admin-dashboard/js/pages/dashboard.js')}}"></script>--}}
 
 {{-- DataTable Edit --}}
 <script>

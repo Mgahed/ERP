@@ -1,7 +1,6 @@
 @extends('admin_master')
 @section('admin')
 
-
     <!-- Content Wrapper. Contains page content -->
 
     <div class="container-full">
@@ -43,8 +42,52 @@
                                             @if (auth()->user()->role === 'admin')
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->role }}</td>
-                                                <td>
-                                                    <div class="btn-group-vertical"
+                                                <td class="d-flex justify-content-center">
+                                                    @if($user->role !== 'deleted')
+
+                                                        <div class="dropdown show mr-3">
+                                                            <a class="btn btn-primary dropdown-toggle w-100" href="#"
+                                                               role="button" id="dropdownMenuButton_{{$user->id}}"
+                                                               data-toggle="dropdown" aria-haspopup="true"
+                                                               aria-expanded="false">
+                                                                <i class="icon ti-settings"></i> {{$user->role}}
+                                                            </a>
+                                                            <div class="dropdown-menu"
+                                                                 aria-labelledby="dropdownMenuButton_{{$user->id}}">
+                                                                @if($user->role !== 'admin')
+                                                                    <a class="dropdown-item"
+                                                                       href="{{route('SetAdmin',$user->id)}}">Set As
+                                                                        Admin</a>
+                                                                @endif
+                                                                @if($user->role !== 'normal')
+                                                                    <a class="dropdown-item"
+                                                                       href="{{route('SetNormal',$user->id)}}">Set As
+                                                                        Normal</a>
+                                                                @endif
+                                                                @if($user->role !== 'viewer')
+                                                                    <a class="dropdown-item"
+                                                                       href="{{route('SetViewer',$user->id)}}">Set As
+                                                                        Viewer</a>
+                                                                @endif
+                                                                @if($user->role !== 'product')
+                                                                    <a class="dropdown-item"
+                                                                       href="{{route('SetProduct',$user->id)}}">Set As
+                                                                        Product Viewer</a>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+
+                                                        @if($user->role !== 'admin')
+                                                            <a href="{{route('delete.user',$user->id)}}"
+                                                               class="btn btn-danger">
+                                                                <i class="icon ti-trash"></i> Delete
+                                                            </a>
+                                                        @endif
+
+                                                    @else
+                                                        <span class="text-danger">This User Is deleted</span>
+                                                    @endif
+                                                    {{--<div class="btn-group-vertical"
                                                          style="display: inline-flex; width: 100%;">
                                                         @if ($user->role !== 'admin')
                                                             <a href="{{route('SetAdmin',$user->id)}}"
@@ -59,7 +102,7 @@
                                                                 <i
                                                                     class="fa fa-arrow-down"></i></a>
                                                         @endif
-                                                    </div>
+                                                    </div>--}}
                                                 </td>
                                             @endif
                                         </tr>

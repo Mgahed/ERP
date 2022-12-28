@@ -25,7 +25,9 @@
                                         <th>{{__('Amount')}}</th>
                                         <th>{{__('Cashier')}}</th>
                                         <th>{{__('Customer')}}</th>
-                                        <th>{{__('Action')}}</th>
+                                        @if(auth()->user()->role === 'admin' || auth()->user()->role === 'normal')
+                                            <th>{{__('Action')}}</th>
+                                        @endif
 
                                     </tr>
                                     </thead>
@@ -38,14 +40,17 @@
                                             <td> {{$item->user->name}}  </td>
                                             <td> {{$item->customer->name}}  </td>
 
-                                            <td width="25%">
-                                                <a href="{{ route('view-order',$item->id) }}"
-                                                   class="btn btn-info" title="Details"><i class="fa fa-eye"></i> </a>
-                                                <a href="{{route('delete.order',$item->id)}}" class="btn btn-danger"
-                                                   title="Delete order">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </td>
+                                            @if(auth()->user()->role === 'admin' || auth()->user()->role === 'normal')
+                                                <td width="25%">
+                                                    <a href="{{ route('view-order',$item->id) }}"
+                                                       class="btn btn-info" title="Details"><i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a href="{{route('delete.order',$item->id)}}" class="btn btn-danger"
+                                                       title="Delete order">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                     </tbody>

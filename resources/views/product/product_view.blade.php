@@ -1,7 +1,6 @@
 @extends('admin_master')
 @section('admin')
 
-
     <!-- Content Wrapper. Contains page content -->
 
     <div class="container-full">
@@ -37,8 +36,9 @@
                                         <th>{{__('Category')}}</th>
                                         <th>{{__('Subcategory')}}</th>
                                         <th>{{__('Sub Subcategory')}}</th>
-                                        <th>{{__('Action')}}</th>
-
+                                        @if(auth()->user()->role === 'admin' || auth()->user()->role === 'normal')
+                                            <th>{{__('Action')}}</th>
+                                        @endif
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -55,7 +55,8 @@
 
                                             <td>
                                                 @if($item->discount_price == NULL)
-                                                    <span class="badge badge-pill badge-danger">{{__('No Discount')}}</span>
+                                                    <span
+                                                        class="badge badge-pill badge-danger">{{__('No Discount')}}</span>
                                                 @else
                                                     @php
                                                         $amount = $item->sell_price - $item->discount_price;
@@ -71,30 +72,36 @@
                                                 @if($item->tax == NULL)
                                                     <span class="badge badge-pill badge-danger">{{__('No Tax')}}</span>
                                                 @else
-                                                    <span class="badge badge-pill badge-danger">{{ $item->tax }} %</span>
+                                                    <span
+                                                        class="badge badge-pill badge-danger">{{ $item->tax }} %</span>
                                                 @endif
                                             </td>
 
                                             <td>{{ $item->category->name_en }} - {{$item->category->name_ar}}</td>
-                                            <td>{{ $item->subCategory->name_en ?? '' }} - {{$item->subCategory->name_ar ?? ''}}</td>
-                                            <td>{{ $item->subSubCategory->name_en ?? '' }} - {{$item->subSubCategory->name_ar ?? ''}}</td>
+                                            <td>{{ $item->subCategory->name_en ?? '' }}
+                                                - {{$item->subCategory->name_ar ?? ''}}</td>
+                                            <td>{{ $item->subSubCategory->name_en ?? '' }}
+                                                - {{$item->subSubCategory->name_ar ?? ''}}</td>
 
+                                            @if(auth()->user()->role === 'admin' || auth()->user()->role === 'normal')
+                                                <td width="30%">
+                                                    <a href="{{ route('product.edit',$item->id) }}"
+                                                       class="btn btn-primary"
+                                                       title="Product Details Data"><i class="fa fa-eye"></i> </a>
 
-                                            <td width="30%">
-                                                <a href="{{ route('product.edit',$item->id) }}" class="btn btn-primary"
-                                                   title="Product Details Data"><i class="fa fa-eye"></i> </a>
+                                                    <a href="{{ route('product.edit',$item->id) }}" class="btn btn-info"
+                                                       title="Edit Data"><i class="fa fa-pencil"></i> </a>
 
-                                                <a href="{{ route('product.edit',$item->id) }}" class="btn btn-info"
-                                                   title="Edit Data"><i class="fa fa-pencil"></i> </a>
+                                                    <a href="{{ route('product.delete',$item->id) }}"
+                                                       class="btn btn-danger"
+                                                       title="Delete Data" id="delete">
+                                                        <i class="fa fa-trash"></i></a>
 
-                                                <a href="{{ route('product.delete',$item->id) }}" class="btn btn-danger"
-                                                   title="Delete Data" id="delete">
-                                                    <i class="fa fa-trash"></i></a>
-
-                                                <a href="{{ route('barcode',$item->id) }}" class="btn btn-default"
-                                                   title="Barcode">
-                                                    <i class="fa fa-barcode"></i></a>
-                                            </td>
+                                                    <a href="{{ route('barcode',$item->id) }}" class="btn btn-default"
+                                                       title="Barcode">
+                                                        <i class="fa fa-barcode"></i></a>
+                                                </td>
+                                            @endif
 
                                         </tr>
                                     @endforeach
@@ -118,8 +125,5 @@
         <!-- /.content -->
 
     </div>
-
-
-
 
 @endsection
