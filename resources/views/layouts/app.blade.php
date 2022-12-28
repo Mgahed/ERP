@@ -18,7 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <title>{{ config('app.name', 'KikiRiki') }}</title>
+    <title>{{ config('app.name', 'Spinel') }}</title>
 </head>
 <body>
     <div id="app">

@@ -1,5 +1,5 @@
 @component('mail::message')
-# From Kiki Riki System
+# From Spinel System
 
 <p style="color: red; direction: rtl;"> عن {{$email_data['name']}} </p>
 

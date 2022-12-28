@@ -7,14 +7,14 @@
     <meta name="theme-color" content="#027B9A"/>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="#004658">
-    <meta name="apple-mobile-web-app-title" content="Kiki Riki">--}}
+    <meta name="apple-mobile-web-app-title" content="Spinel">--}}
     {{--    End pwa--}}
     {{ pwa_meta() }}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{asset('logo.jpeg')}}">
-    <title>{{ config('app.name', 'KikiRiki') }}</title>
+    <title>{{ config('app.name', 'Spinel') }}</title>
 
     @if (app()->getLocale() === 'en')
 

@@ -133,7 +133,7 @@
     <div class="ticket">
         <span class="centered">
             <img style="width: 250px; border-radius: 20% !important; position: relative; top: -9px;"
-                 src="{{asset('logo.jpeg')}}" alt="Kiki Riki">
+                 src="{{asset('logo.jpeg')}}" alt="Spinel">
         </span>
         <hr style="border-style: dashed;">
         <div style="font-weight: bold;">

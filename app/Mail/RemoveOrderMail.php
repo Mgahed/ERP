@@ -29,6 +29,6 @@ class RemoveOrderMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Delete Order(Kiki Riki)')->markdown('mail.login-mail')->with(['email_data' => $this->email_data]);
+        return $this->subject('Delete Order(Spinel)')->markdown('mail.login-mail')->with(['email_data' => $this->email_data]);
     }
 }

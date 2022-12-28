@@ -82,7 +82,7 @@
     <meta name="theme-color" content="#027B9A"/>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="#004658">
-    <meta name="apple-mobile-web-app-title" content="Kiki Riki">--}}
+    <meta name="apple-mobile-web-app-title" content="Spinel">--}}
     {{--    End pwa--}}
     {{ pwa_meta() }}
     <meta charset="utf-8">
@@ -120,7 +120,7 @@
                 <div class="col-lg-4 col-md-5 col-12">
                     <div class="content-top-agile p-10">
                         <img style="width: 200px; border-radius: 20% !important; position: relative; top: -9px;"
-                             src="{{asset('logo.jpeg')}}" alt="Kiki Riki">
+                             src="{{asset('logo.jpeg')}}" alt="Spinel">
                         <p class="text-white-50">{{__('Sign in')}}</p>
                     </div>
                     <div class="p-30 rounded30 box-shadowed b-2 b-dashed">

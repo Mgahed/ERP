@@ -30,6 +30,6 @@ class DeleteProductMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Delete Product(Kiki Riki)')->markdown('mail.login-mail')->with(['email_data' => $this->email_data]);
+        return $this->subject('Delete Product(Spinel)')->markdown('mail.login-mail')->with(['email_data' => $this->email_data]);
     }
 }

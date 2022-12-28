@@ -150,9 +150,9 @@
     <div class="ticket">
         <span class="centered">
             {{--<img style="width: 250px; border-radius: 20% !important; position: relative; top: -9px;"
-                 src="{{asset('logo.jpeg')}}" alt="Kiki Riki">--}}
+                 src="{{asset('logo.jpeg')}}" alt="Spinel">--}}
             <span style="float: left">
-                <b>{{config('app.name', 'KikiRiki')}}</b>
+                <b>{{config('app.name', 'Spinel')}}</b>
                 &ensp;
                 <b style="/*font-size: 18px;*/">{{$product_price+0}} LE</b>{{--0.03 - 0.4 - 0.57 - 0.49--}}
             </span>

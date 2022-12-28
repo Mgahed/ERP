@@ -29,6 +29,6 @@ class LoginMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Login(Kiki Riki)')->markdown('mail.login-mail')->with(['email_data' => $this->email_data]);
+        return $this->subject('Login(Spinel)')->markdown('mail.login-mail')->with(['email_data' => $this->email_data]);
     }
 }

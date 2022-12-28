@@ -29,6 +29,6 @@ class OrderMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('New Order(Kiki Riki)')->markdown('mail.login-mail')->with(['email_data' => $this->email_data]);
+        return $this->subject('New Order(Spinel)')->markdown('mail.login-mail')->with(['email_data' => $this->email_data]);
     }
 }

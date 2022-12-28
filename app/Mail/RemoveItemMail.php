@@ -30,6 +30,6 @@ class RemoveItemMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Remove Item(Kiki Riki)')->markdown('mail.login-mail')->with(['email_data' => $this->email_data]);
+        return $this->subject('Remove Item(Spinel)')->markdown('mail.login-mail')->with(['email_data' => $this->email_data]);
     }
 }
