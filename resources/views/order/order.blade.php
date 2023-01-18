@@ -31,8 +31,10 @@
                             <span class="text-danger">{{__('Cashier')}}:</span> <b>{{$order->user->name}}</b><br>
                             <span class="text-danger">{{__('Customer')}}:</span> <b>{{$order->customer->name}}</b><br>
                             <hr>
-                            <span class="text-danger">{{__('Special discount')}}:</span> <b>{{$order->customer_discount}}{{__('EGP')}}</b><br>
-                            <span class="text-danger">{{__('Total')}}:</span> <b>{{$order->amount - $order->customer_discount}}{{__('EGP')}}</b>
+                            <span class="text-danger">{{__('Special discount')}}:</span>
+                            <b>{{$order->customer_discount}}{{__('EGP')}}</b><br>
+                            <span class="text-danger">{{__('Total')}}:</span>
+                            <b>{{$order->amount - $order->customer_discount}}{{__('EGP')}}</b>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -52,7 +54,7 @@
                                     <tbody>
                                     @foreach($order->orderItem as $item)
                                         <tr>
-                                            <td> {{app()->getLocale()=='en'?$item->product->name_en:$item->product->name_ar}}  </td>
+                                            <td> {{app()->getLocale()==='en'?($item->product->name_en ?? __('Deleted Product')):($item->product->name_ar ?? 'منتج محذوف')}}  </td>
                                             <td> {{$item->qty}}  </td>
                                             <td> {{$item->qty}}*{{$item->price}}{{__('EGP')}}  </td>
                                             <td> {{$item->qty}}*{{$item->discount}}{{__('EGP')}}  </td>

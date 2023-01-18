@@ -1067,5 +1067,6 @@
     "Sub Subcategory Updated Successfully": "تم تحديث الفئة الفرعية الفرعية بنجاح",
     "Edit Sub Subcategory": "تحرير الفئة الفرعية الفرعية",
     "Sub Subcategory Deleted Successfully": "تم حذف الفئة الفرعية الفرعية بنجاح",
-    "Add Sub Subcategory": "أضف الفئة الفرعية الفرعية"
+    "Add Sub Subcategory": "أضف الفئة الفرعية الفرعية",
+    "Deleting Category will lead to automatically delete all related sub categories, sub sub categories and related products": "سيؤدي حذف التصنيف إلى حذف جميع التصنيفات الفرعية والتصنيفات الفرعية ذات الصلة والمنتجات ذات الصلة تلقائيًا"
 }

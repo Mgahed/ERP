@@ -68,6 +68,8 @@ class CategoryController extends Controller
     public function CategoryUpdate(Request $request)
     {
         $rules = $this->getRules();
+        $rules['name_en'] = 'required|unique:categories,name_en,' . $request->id;
+        $rules['name_ar'] = 'required|unique:categories,name_ar,' . $request->id;
         $customMSG = $this->getMSG();
         $validator = Validator::make($request->all(), $rules, $customMSG);
         if ($validator->fails()) {

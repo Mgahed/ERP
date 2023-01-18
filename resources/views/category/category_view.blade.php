@@ -1,7 +1,6 @@
 @extends('admin_master')
 @section('admin')
 
-
     <!-- Content Wrapper. Contains page content -->
 
     <div class="container-full">
@@ -18,7 +17,11 @@
                     <div class="box">
                         <div class="box-header with-border">
                             <h3 class="box-title">{{__('Category List')}} <span
-                                    class="badge badge-pill badge-danger"> {{ count($category) }} </span></h3>
+                                    class="badge badge-pill badge-danger"> {{ count($category) }} </span>
+                            </h3>
+                            <br>
+                            <small
+                                class="text-danger">{{__('Deleting Category will lead to automatically delete all related sub categories, sub sub categories and related products')}}</small>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -40,9 +43,9 @@
                                             <td>
                                                 <a href="{{ route('category.edit',$item->id) }}" class="btn btn-info"
                                                    title="Edit Data"><i class="fa fa-pencil"></i> </a>
-                                                {{--<a href="{{ route('category.delete',$item->id) }}"
+                                                <a href="{{ route('category.delete',$item->id) }}"
                                                    class="btn btn-danger" title="Delete Data" id="delete">
-                                                    <i class="fa fa-trash"></i></a>--}}
+                                                    <i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -123,8 +126,5 @@
         <!-- /.content -->
 
     </div>
-
-
-
 
 @endsection
